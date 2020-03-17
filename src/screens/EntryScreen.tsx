@@ -9,7 +9,7 @@ export default function EntryScreen(props) {
     return (
         <View style={styles.container}>
             <View style={styles.content}>
-                <Image style={styles.logo} source={require('../assets/seeus-logo.png')}/>
+                <Image style={styles.logo} source={require('../../assets/seeus-logo.png')}/>
                 <TouchableOpacity activeOpacity={0.5} style={styles.loginButton} onPress={() => authDispatch({ type: AuthActionType.Login})}>
                     <Text style={styles.loginButtonText}>Login with NetID</Text>
                 </TouchableOpacity>
