@@ -3,6 +3,7 @@ import {Image, StyleSheet, TouchableHighlight, TouchableOpacity, View, Text} fro
 import baseStyle from "../styles/base";
 import colors, {theme} from "../styles/colors";
 import {AuthActionType, useAuthDispatch} from "../contexts/AuthContext";
+import Button from "../components/Button";
 
 export default function EntryScreen(props) {
     const authDispatch = useAuthDispatch();
@@ -10,9 +11,10 @@ export default function EntryScreen(props) {
         <View style={styles.container}>
             <View style={styles.content}>
                 <Image style={styles.logo} source={require('../../assets/seeus-logo.png')}/>
-                <TouchableOpacity activeOpacity={0.5} style={styles.loginButton} onPress={() => authDispatch({ type: AuthActionType.Login})}>
-                    <Text style={styles.loginButtonText}>Login with NetID</Text>
-                </TouchableOpacity>
+                <Button text="Login with NetID"
+                        style={styles.loginButton}
+                        textStyle={styles.loginButtonText}
+                        onPress={() => authDispatch({ type: AuthActionType.Login})} />
             </View>
             <TouchableOpacity onPress={() => {}}>
                 <Text style={styles.noNetIdLink}>No NetID? Tap here</Text>
@@ -31,22 +33,8 @@ const styles = StyleSheet.create({
         marginBottom: 30,
     },
     loginButton: {
-        alignItems: 'center',
         marginTop: 50,
-        paddingVertical: 20,
-        paddingHorizontal: 20,
-
         backgroundColor: colors.seeusYellow,
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.23,
-        shadowRadius: 2.62,
-        elevation: 4,
-
-        borderRadius: 3,
     },
     loginButtonText: {
         fontSize: 28,
