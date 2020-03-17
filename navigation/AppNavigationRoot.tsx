@@ -31,7 +31,11 @@ function LoggedInNavigator() {
     const Drawer = createDrawerNavigator();
     return (
         <Drawer.Navigator drawerContent={props => <AppDrawerContent {...props} />}>
-            <Drawer.Screen name="New Request" component={MainScreen}/>
+            <Drawer.Screen
+                name="Main"
+                component={MainScreen}
+                options={{title: "New Request"}}
+            />
             <Drawer.Screen name="Scheduled" component={ScheduledScreen}/>
             <Drawer.Screen name="Hours" component={HoursScreen}/>
             <Drawer.Screen name="Help" component={HelpScreen}/>
