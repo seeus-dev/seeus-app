@@ -4,9 +4,9 @@ import {DrawerContentScrollView, DrawerItem, DrawerItemList} from "@react-naviga
 import {Linking} from "expo";
 import {FontAwesome} from "@expo/vector-icons";
 
-import colors, {theme} from "../styles/colors";
+import {theme} from "../styles/colors";
 import SeeusConstants from "../SeeusConstants";
-import {AuthActionType, useAuthDispatch} from "../contexts/AuthContext";
+import {AuthActionType, useAuthDispatch, useAuthState} from "../contexts/AuthContext";
 
 /**
  * This component is what is displayed in the main navigation drawer.
@@ -14,10 +14,11 @@ import {AuthActionType, useAuthDispatch} from "../contexts/AuthContext";
  */
 export default function AppDrawerContent(props) {
     const authDispatch = useAuthDispatch();
+    const authState = useAuthState();
     const doLogout = () => authDispatch({type: AuthActionType.Logout});
     return (
         <>
-            <Header/>
+            <Header name={authState.username} email={authState.username + "@emich.edu"}/>
             <DrawerContentScrollView style={styles.scrollView} {...props}>
                 <DrawerItemList
                     itemStyle={styles.drawerItem}
@@ -37,13 +38,13 @@ export default function AppDrawerContent(props) {
     );
 }
 
-function Header(props) {
+function Header({name, email}) {
     return (
         <View style={styles.header}>
             <View style={styles.headerUserImage}/>
             <View style={styles.headerUserInfoContainer}>
-                <Text style={styles.headerUserName}>Sally May</Text>
-                <Text style={styles.headerUserEmail}>smay2@emich.edu</Text>
+                <Text style={styles.headerUserName}>{name}</Text>
+                <Text style={styles.headerUserEmail}>{email}</Text>
             </View>
         </View>
     )

@@ -5,13 +5,15 @@ export enum AuthActionType {
     Logout = 'logout'
 }
 
-type Action = { type: AuthActionType }
+type Action = { type: AuthActionType, username?: string }
 type Dispatch = (action: Action) => void
 type State = {
-    isLoggedIn: boolean
+    isLoggedIn: boolean,
+    username: string,
 }
 const initialState: State = {
-    isLoggedIn: false
+    isLoggedIn: false,
+    username: null
 };
 
 const AuthStateContext = React.createContext<State | undefined>(undefined);
@@ -20,9 +22,9 @@ const AuthDispatchContext = React.createContext<Dispatch | undefined>(undefined)
 function reducer(state: State, action: Action) {
     switch (action.type) {
         case AuthActionType.Login:
-            return {...state, isLoggedIn: true};
+            return {...state, isLoggedIn: true, username: action.username};
         case AuthActionType.Logout:
-            return {...state, isLoggedIn: false};
+            return {...state, isLoggedIn: false, username: null};
     }
 }
 

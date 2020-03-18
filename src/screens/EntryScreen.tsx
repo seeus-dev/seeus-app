@@ -2,11 +2,9 @@ import React from 'react';
 import {Image, StyleSheet, TouchableHighlight, TouchableOpacity, View, Text} from "react-native";
 import baseStyle from "../styles/base";
 import colors, {theme} from "../styles/colors";
-import {AuthActionType, useAuthDispatch} from "../contexts/AuthContext";
 import Button from "../components/Button";
 
 export default function EntryScreen(props) {
-    const authDispatch = useAuthDispatch();
     return (
         <View style={styles.container}>
             <View style={styles.content}>
@@ -14,7 +12,8 @@ export default function EntryScreen(props) {
                 <Button label="Login with NetID"
                         style={styles.loginButton}
                         labelStyle={styles.loginButtonText}
-                        onPress={() => authDispatch({ type: AuthActionType.Login})} />
+                        showShadow={true}
+                        onPress={() => props.navigation.navigate('Login')} />
             </View>
             <TouchableOpacity onPress={() => {}}>
                 <Text style={styles.noNetIdLink}>No NetID? Tap here</Text>
@@ -27,7 +26,6 @@ const styles = StyleSheet.create({
     container: {
         ...baseStyle.container,
         backgroundColor: theme.primary,
-        flexDirection: 'column',
     },
     logo: {
         marginBottom: 30,
