@@ -11,6 +11,7 @@ import HelpScreen from "../screens/HelpScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 import {useAuthState} from "../contexts/AuthContext";
 import AppDrawerContent from "./AppDrawerContent";
+import {Ionicons} from '@expo/vector-icons';
 
 function LoggedOutNavigator() {
     const Stack = createStackNavigator();
@@ -34,9 +35,9 @@ function LoggedInNavigator() {
             <Drawer.Screen
                 name="Main"
                 component={MainScreen}
-                options={{title: "New Request"}}
+                options={{title: "Request Escort"}}
             />
-            <Drawer.Screen name="Scheduled" component={ScheduledScreen}/>
+            <Drawer.Screen name="My Requests" component={ScheduledScreen}/>
             <Drawer.Screen name="Hours" component={HoursScreen}/>
             <Drawer.Screen name="Help" component={HelpScreen}/>
             <Drawer.Screen name="Settings" component={SettingsScreen}/>

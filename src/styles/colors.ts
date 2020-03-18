@@ -1,5 +1,5 @@
 export const colors = {
-    darkGreen: '#096D3B',
+    darkGreen: '#0d6d46',
     darkYellow: '#F2C94C',
     seeusYellow: '#FDE31A',
 };
