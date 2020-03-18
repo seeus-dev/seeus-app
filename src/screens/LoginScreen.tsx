@@ -1,6 +1,6 @@
 import React, {useRef, useState} from 'react';
 import {StyleSheet, Text, TextInput, TouchableWithoutFeedback, View} from "react-native";
-import { FontAwesome } from "@expo/vector-icons";
+import {FontAwesome} from "@expo/vector-icons";
 import baseStyle from "../styles/base";
 import Button from "../components/Button";
 import colors, {theme} from "../styles/colors";
@@ -12,7 +12,7 @@ export default function LoginScreen({navigation}) {
     const authDispatch = useAuthDispatch();
     const submit = () => {
         // TODO: open web view to login with google oauth
-        authDispatch({ type: AuthActionType.Login, username });
+        authDispatch({type: AuthActionType.Login, username});
     };
 
     return (
@@ -22,7 +22,7 @@ export default function LoginScreen({navigation}) {
                 <Text style={styles.headerTextSmaller}>Let's start by entering your NetID</Text>
             </View>
             <View style={{flexDirection: 'row'}}>
-                <UsernameInput username={username} setUsername={setUsername}/>
+                <UsernameInput username={username} onChange={setUsername}/>
             </View>
             <View style={{flexDirection: 'row'}}>
                 <Button label="Cancel"
@@ -35,31 +35,31 @@ export default function LoginScreen({navigation}) {
                         showShadow={true}
                         style={styles.submitButton}
                         labelStyle={styles.submitButtonLabel}>
-                    <FontAwesome name="arrow-right" size={18} />
+                    <FontAwesome name="arrow-right" size={18}/>
                 </Button>
             </View>
         </View>
     );
 }
 
-function UsernameInput({username, setUsername}) {
+function UsernameInput({username, onChange}) {
     const usernameInputRef = useRef(null);
     const focusInput = () => {
         const input = usernameInputRef.current;
         input.blur();
         setTimeout(() => input.focus(), 50);
     };
-    const setUsernameClean = username => {
-        // remove non-alphanumerical characters and "emich.edu"
-        setUsername(username.replace(/[^A-Za-z0-9\.]|(emich?.edu)/g, ""));
+    const setUsername = username => {
+        // remove non-alphanumerical characters and "emich.edu" (in case of auto fill)
+        onChange(username.replace(/[^A-Za-z0-9\.]|(emich?.edu)/g, ""));
     };
 
     return (
         <TouchableWithoutFeedback onPress={focusInput}>
             <View style={styles.usernameInputContainer}>
-                <TextInput ref={usernameInputRef}
-                           onChangeText={text => setUsernameClean(text)}
-                           value={username}
+                <TextInput value={username}
+                           onChangeText={text => setUsername(text)}
+                           ref={usernameInputRef}
                            style={styles.usernameInput}
                            accessibilityHint="NetID Username"
                            autoFocus={true}
