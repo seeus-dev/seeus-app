@@ -5,7 +5,7 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 
 import EntryScreen from '../screens/EntryScreen';
 import MainScreen from '../screens/MainScreen';
-import ScheduledScreen from "../screens/ScheduledScreen";
+import ScheduledScreen from "../screens/RequestsScreen";
 import HoursScreen from "../screens/HoursScreen";
 import HelpScreen from "../screens/HelpScreen";
 import SettingsScreen from "../screens/SettingsScreen";
@@ -35,7 +35,7 @@ function LoggedInNavigator() {
             <Drawer.Screen
                 name="Main"
                 component={MainScreen}
-                options={{title: "Request Escort"}}
+                options={{title: "Request SEEUS"}}
             />
             <Drawer.Screen name="My Requests" component={ScheduledScreen}/>
             <Drawer.Screen name="Hours" component={HoursScreen}/>

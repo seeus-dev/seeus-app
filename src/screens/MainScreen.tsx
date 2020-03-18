@@ -5,7 +5,7 @@ import baseStyle from "../styles/base";
 export default function MainScreen() {
     return (
         <View style={styles.container}>
-            <Text>Main Screen</Text>
+            <Text>Main Request Screen</Text>
         </View>
     );
 }
