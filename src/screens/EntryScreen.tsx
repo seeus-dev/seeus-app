@@ -11,9 +11,9 @@ export default function EntryScreen(props) {
         <View style={styles.container}>
             <View style={styles.content}>
                 <Image style={styles.logo} source={require('../../assets/seeus-logo.png')}/>
-                <Button text="Login with NetID"
+                <Button label="Login with NetID"
                         style={styles.loginButton}
-                        textStyle={styles.loginButtonText}
+                        labelStyle={styles.loginButtonText}
                         onPress={() => authDispatch({ type: AuthActionType.Login})} />
             </View>
             <TouchableOpacity onPress={() => {}}>
@@ -33,7 +33,6 @@ const styles = StyleSheet.create({
         marginBottom: 30,
     },
     loginButton: {
-        marginTop: 50,
         backgroundColor: colors.seeusYellow,
     },
     loginButtonText: {
@@ -49,11 +48,5 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
         paddingBottom: 15,
-        textShadowColor: '#000',
-        textShadowRadius: 1,
-        textShadowOffset: {
-            width: 1,
-            height: 0
-        }
     }
 });

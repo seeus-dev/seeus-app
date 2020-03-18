@@ -1,13 +1,21 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity} from "react-native";
+import {StyleSheet, StyleSheetProperties, Text, TextStyle, TouchableOpacity, ViewStyle} from "react-native";
 import colors from "../styles/colors";
 
-export default function Button(props) {
-    const buttonStyle = { ...styles.button, ...props.style };
-    const textStyle = { ...styles.buttonText, ...props.textStyle };
+type ButtonProps = {
+    label: String
+    onPress: (event) => void,
+    style: ViewStyle,
+    labelStyle: TextStyle,
+    activeOpacity?: number
+}
+
+export default function Button(props: ButtonProps) {
+    const buttonStyle = {...styles.button, ...props.style};
+    const labelStyle = {...styles.label, ...props.labelStyle};
     return (
-        <TouchableOpacity activeOpacity={0.5} style={buttonStyle} onPress={props.onPress}>
-            <Text style={textStyle}>{ props.text }</Text>
+        <TouchableOpacity activeOpacity={props.activeOpacity || 0.5} style={buttonStyle} onPress={props.onPress}>
+            <Text style={labelStyle}>{props.label}</Text>
         </TouchableOpacity>
     );
 }
@@ -31,8 +39,7 @@ const styles = StyleSheet.create({
 
         borderRadius: 3,
     },
-    buttonText: {
-        fontSize: 28,
-        fontWeight: 'bold',
+    label: {
+        fontSize: 20,
     },
 });
