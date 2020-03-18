@@ -4,11 +4,9 @@ import {DrawerContentScrollView, DrawerItem, DrawerItemList} from "@react-naviga
 import {Linking} from "expo";
 import {FontAwesome} from "@expo/vector-icons";
 
-import {theme} from "../styles/colors";
+import colors, {theme} from "../styles/colors";
 import SeeusConstants from "../SeeusConstants";
 import {AuthActionType, useAuthDispatch} from "../contexts/AuthContext";
-
-const ACTIVE_BG_COLOR = "#0d734d";
 
 /**
  * This component is what is displayed in the main navigation drawer.
@@ -24,9 +22,7 @@ export default function AppDrawerContent(props) {
                 <DrawerItemList
                     itemStyle={styles.drawerItem}
                     labelStyle={styles.drawerItemLabel}
-                    activeBackgroundColor={ACTIVE_BG_COLOR}
-                    getLabel={(scene) => {
-                    }}
+                    activeBackgroundColor={theme.primaryLighter}
                     {...props}
                 />
                 <DrawerItem
@@ -76,7 +72,10 @@ const styles = StyleSheet.create({
         padding: 0,
         backgroundColor: theme.primary
     },
-    drawerItem: {},
+    drawerItem: {
+        borderRadius: 5,
+        paddingLeft: 5
+    },
     drawerItemLabel: {
         color: '#fff',
         fontSize: 23,
@@ -109,7 +108,7 @@ const styles = StyleSheet.create({
     footer: {
         paddingVertical: 10,
         paddingLeft: 10,
-        backgroundColor: ACTIVE_BG_COLOR,
+        backgroundColor: theme.primaryLighter,
         alignItems: 'center',
         flexDirection: 'row',
         justifyContent: 'space-around',
