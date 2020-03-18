@@ -13,6 +13,7 @@ import SettingsScreen from "../screens/SettingsScreen";
 import AppDrawerContent from "./AppDrawerContent";
 
 import {useAuthState} from "../contexts/AuthContext";
+import OauthWebViewScreen from "../screens/login/OauthWebViewScreen";
 
 
 function LoggedOutNavigator() {
@@ -23,6 +24,7 @@ function LoggedOutNavigator() {
         }}>
             <Stack.Screen name="Entry" component={EntryScreen}/>
             <Stack.Screen name="Login" component={LoginScreen}/>
+            <Stack.Screen name="OauthWebView" component={OauthWebViewScreen}/>
         </Stack.Navigator>
     );
 }

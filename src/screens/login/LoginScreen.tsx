@@ -9,8 +9,9 @@ import colors, {theme} from "../../styles/colors";
 export default function LoginScreen({navigation}) {
     const [username, setUsername] = useState("");
     const submit = () => {
-        // TODO: open web view to login with google oauth
-        authDispatch({type: AuthActionType.Login, username});
+        if (username.length > 0) {
+            navigation.navigate('OauthWebView', {username});
+        }
     };
 
     return (
