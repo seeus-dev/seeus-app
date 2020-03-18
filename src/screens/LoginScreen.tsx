@@ -32,6 +32,7 @@ export default function LoginScreen({navigation}) {
                 />
                 <Button label="Continue"
                         onPress={submit}
+                        showShadow={true}
                         style={styles.submitButton}
                         labelStyle={styles.submitButtonLabel}>
                     <FontAwesome name="arrow-right" size={18} />
