@@ -74,7 +74,6 @@ const styles = StyleSheet.create({
     },
     drawerItem: {
         borderRadius: 5,
-        paddingLeft: 5
     },
     drawerItemLabel: {
         color: '#fff',
