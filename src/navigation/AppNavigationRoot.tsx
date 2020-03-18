@@ -4,7 +4,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 
 import EntryScreen from "../screens/EntryScreen";
-import LoginScreen from "../screens/LoginScreen";
+import LoginScreen from "../screens/login/LoginScreen";
 import NewRequestScreen from "../screens/NewRequestScreen";
 import RequestsScreen from "../screens/RequestsScreen";
 import HoursScreen from "../screens/HoursScreen";

@@ -1,15 +1,13 @@
 import React, {useRef, useState} from 'react';
 import {StyleSheet, Text, TextInput, TouchableWithoutFeedback, View} from "react-native";
 import {FontAwesome} from "@expo/vector-icons";
-import baseStyle from "../styles/base";
-import Button from "../components/Button";
-import colors, {theme} from "../styles/colors";
+import baseStyle from "../../styles/base";
+import Button from "../../components/Button";
+import colors, {theme} from "../../styles/colors";
 
-import {AuthActionType, useAuthDispatch} from "../contexts/AuthContext";
 
 export default function LoginScreen({navigation}) {
     const [username, setUsername] = useState("");
-    const authDispatch = useAuthDispatch();
     const submit = () => {
         // TODO: open web view to login with google oauth
         authDispatch({type: AuthActionType.Login, username});
@@ -51,7 +49,7 @@ function UsernameInput({username, onChange}) {
     };
     const setUsername = username => {
         // remove non-alphanumerical characters and "emich.edu" (in case of auto fill)
-        onChange(username.replace(/[^A-Za-z0-9\.]|(emich?.edu)/g, ""));
+        onChange(username.trim().replace(/[^A-Za-z0-9\.]|(emich?.edu)/g, ""));
     };
 
     return (

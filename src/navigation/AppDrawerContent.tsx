@@ -18,7 +18,7 @@ export default function AppDrawerContent(props) {
     const doLogout = () => authDispatch({type: AuthActionType.Logout});
     return (
         <>
-            <Header name={authState.username} email={authState.username + "@emich.edu"}/>
+            <Header name={authState.user.username} email={authState.user.username + "@emich.edu"}/>
             <DrawerContentScrollView style={styles.scrollView} {...props}>
                 <DrawerItemList
                     itemStyle={styles.drawerItem}
