@@ -12,7 +12,7 @@ export default function EnterEidScreen({navigation}) {
     const {user} = useAuthState();
     const submit = () => {
         if (eid.length > 0) {
-            navigation.navigate('OauthWebView', {username: eid});
+            authDispatch({type: AuthActionType.UpdateAuthUser, user: {eid}})
         }
     };
     const logout = () => {
