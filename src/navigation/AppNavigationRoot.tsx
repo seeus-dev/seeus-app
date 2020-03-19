@@ -15,9 +15,10 @@ import EnterEidScreen from "../screens/login/EnterEidScreen";
 import AppDrawerContent from "./AppDrawerContent";
 import {useAuthState, UserInfo} from "../contexts/AuthContext";
 
+const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
 
 function LoggedOutNavigator() {
-    const Stack = createStackNavigator();
     return (
         <Stack.Navigator headerMode="none" screenOptions={{
             animationTypeForReplace: 'pop'
@@ -30,7 +31,6 @@ function LoggedOutNavigator() {
 }
 
 function LoggedInMainNav() {
-    const Drawer = createDrawerNavigator();
     return (
         <Drawer.Navigator drawerContent={props => <AppDrawerContent {...props} />}>
             <Drawer.Screen
@@ -47,7 +47,6 @@ function LoggedInMainNav() {
 }
 
 function LoggedInOnboardingNav() {
-    const Stack = createStackNavigator();
     return (
         <Stack.Navigator headerMode="none">
             <Stack.Screen name="EnterEid" component={EnterEidScreen}/>
@@ -61,6 +60,7 @@ function LoggedInNavigator({user}: { user: UserInfo }) {
 
 export default function AppNavigationRoot() {
     const authState = useAuthState();
+    console.log('Root component render. Auth state = ', authState);
     return (
         <NavigationContainer>
             {authState.isLoggedIn ? <LoggedInNavigator user={authState.user}/> : <LoggedOutNavigator/>}
