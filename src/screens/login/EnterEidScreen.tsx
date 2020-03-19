@@ -4,6 +4,7 @@ import {FontAwesome} from "@expo/vector-icons";
 import Button from "../../components/Button";
 import onboardingStyle from './onboarding-screen-style';
 import {AuthActionType, useAuthDispatch, useAuthState} from "../../contexts/AuthContext";
+import {cleanEid, focusTextInput} from "../../util";
 
 export default function EnterEidScreen({navigation}) {
     const [eid, setEid] = useState("");
@@ -23,13 +24,13 @@ export default function EnterEidScreen({navigation}) {
                 {text: 'Logout', onPress: () => authDispatch({type: AuthActionType.Logout})},
             ],
             {cancelable: true}
-        )
+        );
     };
 
     return (
         <View style={styles.container}>
             <View>
-                <Text style={styles.titleText}>What's your EID?</Text>
+                <Text style={styles.titleText}>Enter your EID</Text>
                 <Text style={styles.subTitleText}>SEEUS uses your EID (Eastern ID) number for verification.</Text>
             </View>
             <Text style={styles.emailText}>{user.username}@emich.edu</Text>
@@ -56,22 +57,15 @@ export default function EnterEidScreen({navigation}) {
 
 function EidInput({eid, onChange}) {
     const eidInputRef = useRef(null);
-    const focusInput = () => {
-        const input = eidInputRef.current;
-        input.blur();
-        setTimeout(() => input.focus(), 50);
-    };
-    const setEid = (text) => onChange(text.trim().replace(/[^0-9]+/g, ""));
-
     return (
-        <TouchableWithoutFeedback onPress={focusInput}>
+        <TouchableWithoutFeedback onPress={() => focusTextInput(eidInputRef)}>
             <View style={styles.inputContainer}>
                 <Text style={styles.inputStaticText}>E-</Text>
                 <TextInput value={eid}
-                           onChangeText={text => setEid(text)}
+                           onChangeText={text => onChange(cleanEid(text))}
                            ref={eidInputRef}
                            style={styles.input}
-                           accessibilityHint="NetID Username"
+                           accessibilityHint="EID"
                            autoFocus={true}
                            autoCorrect={false}
                            autoCapitalize="none"

@@ -5,6 +5,7 @@ import baseStyle from "../../styles/base";
 import Button from "../../components/Button";
 import colors, {theme} from "../../styles/colors";
 import onboardingStyle from './onboarding-screen-style';
+import {cleanUsername, focusTextInput} from "../../util";
 
 export default function LoginScreen({navigation}) {
     const [username, setUsername] = useState("");
@@ -43,21 +44,11 @@ export default function LoginScreen({navigation}) {
 
 function UsernameInput({username, onChange}) {
     const usernameInputRef = useRef(null);
-    const focusInput = () => {
-        const input = usernameInputRef.current;
-        input.blur();
-        setTimeout(() => input.focus(), 50);
-    };
-    const setUsername = username => {
-        // remove non-alphanumerical characters and "emich.edu" (in case of auto fill)
-        onChange(username.trim().replace(/[^A-Za-z0-9\.]|(emich?.edu)/g, ""));
-    };
-
     return (
-        <TouchableWithoutFeedback onPress={focusInput}>
+        <TouchableWithoutFeedback onPress={() => focusTextInput(usernameInputRef)}>
             <View style={styles.inputContainer}>
                 <TextInput value={username}
-                           onChangeText={text => setUsername(text)}
+                           onChangeText={text => onChange(cleanUsername(text))}
                            ref={usernameInputRef}
                            style={styles.input}
                            accessibilityHint="NetID Username"
