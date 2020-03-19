@@ -1,9 +1,9 @@
 import React, {useCallback, useState} from 'react';
-import {ActivityIndicator, Dimensions, StyleSheet, View, Text} from "react-native";
+import {ActivityIndicator, Dimensions, StyleSheet, TouchableOpacity, View} from "react-native";
 import baseStyle from '../../styles/base';
 import WebView from "react-native-webview";
 import {AuthActionType, useAuthDispatch} from "../../contexts/AuthContext";
-
+import {AntDesign} from "@expo/vector-icons";
 
 export default function OauthWebViewScreen({route, navigation}) {
     const {username} = route.params;
@@ -31,6 +31,9 @@ export default function OauthWebViewScreen({route, navigation}) {
             <View style={styles.loadingContainer}>
                 <ActivityIndicator size="large" color="#000" style={styles.loading}/>
             </View>}
+            <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
+                <AntDesign name="arrowleft" size={30}/>
+            </TouchableOpacity>
             <View style={styles.webViewContainer}>
                 <WebView source={{uri: oauthUrl}}
                          originWhitelist={['*']}
@@ -50,7 +53,8 @@ export default function OauthWebViewScreen({route, navigation}) {
 const styles = StyleSheet.create({
     container: {
         ...baseStyle.container,
-        flexDirection: 'column'
+        flexDirection: 'column',
+        backgroundColor: '#fff',
     },
     loadingContainer: {
         position: 'absolute',
@@ -66,5 +70,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         flex: 1,
     },
-    webView: {}
+    webView: {},
+    backButton: {
+        alignSelf: 'flex-start',
+        padding: 10,
+    }
 });
