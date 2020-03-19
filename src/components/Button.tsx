@@ -1,4 +1,4 @@
-import React, {ReactChild, ReactChildren} from 'react';
+import React, {ReactChild} from 'react';
 import {StyleSheet, Text, TextStyle, TouchableOpacity, ViewStyle} from "react-native";
 import {theme} from "../styles/colors";
 
@@ -10,7 +10,6 @@ type ButtonProps = {
     activeOpacity?: number,
     showShadow?: boolean,
     children?: ReactChild,
-    childrenBefore?: boolean,
 }
 
 export default function Button(props: ButtonProps) {
@@ -19,9 +18,8 @@ export default function Button(props: ButtonProps) {
     const labelStyle = {...styles.label, ...props.labelStyle};
     return (
         <TouchableOpacity activeOpacity={props.activeOpacity || 0.5} style={buttonStyle} onPress={props.onPress}>
-            {props.childrenBefore && props.children}
-            {props.label && <Text style={labelStyle}>{props.label}</Text>}
-            {!props.childrenBefore && props.children}
+            <Text style={labelStyle}>{props.label}</Text>
+            {props.children}
         </TouchableOpacity>
     );
 }

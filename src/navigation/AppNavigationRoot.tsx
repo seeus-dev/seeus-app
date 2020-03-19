@@ -13,6 +13,8 @@ import SettingsScreen from "../screens/SettingsScreen";
 import OauthWebViewScreen from "../screens/login/OauthWebViewScreen";
 import EnterEidScreen from "../screens/login/EnterEidScreen";
 import AppDrawerContent from "./AppDrawerContent";
+import LocationPermissionScreen from "../screens/login/LocationPermissionScreen";
+import {useAppDispatch, useAppState, useEffectPopulateAppState} from "../contexts/AppContext";
 import {useAuthState, UserInfo} from "../contexts/AuthContext";
 
 const Stack = createStackNavigator();
@@ -46,7 +48,7 @@ function LoggedInMainNav() {
     );
 }
 
-function LoggedInOnboardingNav() {
+function LoggedInNewUserNav() {
     return (
         <Stack.Navigator headerMode="none">
             <Stack.Screen name="EnterEid" component={EnterEidScreen}/>
@@ -54,12 +56,32 @@ function LoggedInOnboardingNav() {
     );
 }
 
-function LoggedInNavigator({user}: { user: UserInfo }) {
-    return user.eid ? <LoggedInMainNav/> : <LoggedInOnboardingNav/>;
+function LoggedInAppOnboarding() {
+    return (
+        <Stack.Navigator headerMode="none">
+            <Stack.Screen name="LocationPermission" component={LocationPermissionScreen}/>
+        </Stack.Navigator>
+    );
+}
+
+function LoggedInNavigator({ user }: { user: UserInfo }) {
+    const {hasRequestedLocationPerm} = useAppState();
+    const showOnboarding = !hasRequestedLocationPerm;
+
+    if (!user.eid) {
+        return <LoggedInNewUserNav/>;
+    }
+    if (showOnboarding) {
+        return <LoggedInAppOnboarding />;
+    }
+    return <LoggedInMainNav/>;
 }
 
 export default function AppNavigationRoot() {
     const authState = useAuthState();
+    const appDispatch = useAppDispatch();
+    useEffectPopulateAppState(appDispatch);
+
     console.log('Root component render. Auth state = ', authState);
     return (
         <NavigationContainer>
