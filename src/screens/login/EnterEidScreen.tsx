@@ -1,6 +1,6 @@
 import React, {useRef, useState} from 'react';
 import {Alert, StyleSheet, Text, TextInput, TouchableWithoutFeedback, View} from "react-native";
-import {FontAwesome} from "@expo/vector-icons";
+import {AntDesign} from "@expo/vector-icons";
 import Button from "../../components/Button";
 import onboardingStyle from './onboarding-screen-style';
 import {AuthActionType, useAuthDispatch, useAuthState} from "../../contexts/AuthContext";
@@ -48,7 +48,7 @@ export default function EnterEidScreen({navigation}) {
                         showShadow={true}
                         style={styles.positiveButton}
                         labelStyle={styles.positiveButtonLabel}>
-                    <FontAwesome name="arrow-right" size={18} style={{marginLeft: 10}}/>
+                    <AntDesign name="checkcircle" size={22} style={{marginRight: 10}}/>
                 </Button>
             </View>
         </View>
@@ -105,6 +105,7 @@ const styles = StyleSheet.create({
     },
     positiveButton: {
         ...onboardingStyle.positiveButton,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        flexDirection: 'row-reverse'
     }
 });
