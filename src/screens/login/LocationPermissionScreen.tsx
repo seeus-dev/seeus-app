@@ -23,6 +23,7 @@ export default function LocationPermissionScreen({navigation}) {
         if (!enabled) {
             showLocationDisabledDialog();
         }
+        appDispatch({type: AppActionType.RequestedLocationPermission});
     };
     const skip = () => {
         location.setHaveRequestedLocation(true);
@@ -33,7 +34,7 @@ export default function LocationPermissionScreen({navigation}) {
         <View style={styles.container}>
             <View>
                 <Text style={styles.titleText}>Location</Text>
-                <Text style={styles.subTitleText}>For the best experience using the SEEUS app, allow location services permission</Text>
+                <Text style={styles.subTitleText}>To best experience the SEEUS app, allow location services</Text>
                 <Button label="Enable Location"
                         onPress={enableLocation}
                         showShadow={true}
