@@ -1,13 +1,25 @@
-import React from 'react';
-import {StyleSheet, Text, TouchableOpacity} from "react-native";
-import colors from "../styles/colors";
+import React, {ReactChild, ReactChildren} from 'react';
+import {StyleSheet, Text, TextStyle, TouchableOpacity, ViewStyle} from "react-native";
+import {theme} from "../styles/colors";
 
-export default function Button(props) {
-    const buttonStyle = { ...styles.button, ...props.style };
-    const textStyle = { ...styles.buttonText, ...props.textStyle };
+type ButtonProps = {
+    label: String
+    onPress: (event) => void,
+    style?: ViewStyle,
+    labelStyle?: TextStyle,
+    activeOpacity?: number,
+    showShadow?: boolean,
+    children?: ReactChild,
+}
+
+export default function Button(props: ButtonProps) {
+    const shadowStyle = props.showShadow ? styles.buttonShadow : {};
+    const buttonStyle = {...styles.button, ...props.style, ...shadowStyle};
+    const labelStyle = {...styles.label, ...props.labelStyle};
     return (
-        <TouchableOpacity activeOpacity={0.5} style={buttonStyle} onPress={props.onPress}>
-            <Text style={textStyle}>{ props.text }</Text>
+        <TouchableOpacity activeOpacity={props.activeOpacity || 0.5} style={buttonStyle} onPress={props.onPress}>
+            {props.label && <Text style={labelStyle}>{props.label}</Text>}
+            {props.children}
         </TouchableOpacity>
     );
 }
@@ -19,20 +31,23 @@ const styles = StyleSheet.create({
         paddingVertical: 20,
         paddingHorizontal: 20,
 
-        backgroundColor: colors.seeusYellow,
-        shadowColor: '#000',
+        backgroundColor: theme.secondary,
+
+        borderRadius: 3,
+        flexDirection: 'row',
+        justifyContent: 'space-around'
+    },
+    buttonShadow: {
+        shadowColor: '#111',
         shadowOffset: {
             width: 0,
             height: 2,
         },
-        shadowOpacity: 0.23,
+        shadowOpacity: 0.2,
         shadowRadius: 2.62,
-        elevation: 4,
-
-        borderRadius: 3,
+        elevation: 3,
     },
-    buttonText: {
-        fontSize: 28,
-        fontWeight: 'bold',
+    label: {
+        fontSize: 20,
     },
 });

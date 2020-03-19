@@ -2,10 +2,10 @@ import React from 'react';
 import {StyleSheet, Text, View} from "react-native";
 import baseStyle from "../styles/base";
 
-export default function MainScreen() {
+export default function NewRequestScreen() {
     return (
         <View style={styles.container}>
-            <Text>Main Screen</Text>
+            <Text>Main Request Screen</Text>
         </View>
     );
 }

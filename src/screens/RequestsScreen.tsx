@@ -2,10 +2,13 @@ import React from 'react';
 import {StyleSheet, Text, View} from "react-native";
 import baseStyle from "../styles/base";
 
-export default function MainScreen() {
+/**
+ * This screen shows the users' scheduled and previous (completed) escort requests
+ */
+export default function RequestsScreen() {
     return (
         <View style={styles.container}>
-            <Text>Scheduled Escorts Screen</Text>
+            <Text>Escort Requests</Text>
         </View>
     );
 }

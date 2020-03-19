@@ -4,7 +4,8 @@ export default StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        flexDirection: 'column',
     },
     text: {
         fontSize: 14,
