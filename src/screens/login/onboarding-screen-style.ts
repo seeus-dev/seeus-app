@@ -11,11 +11,13 @@ export default StyleSheet.create({
         padding: 20,
     },
     titleText: {
+        ...baseStyle.text,
         fontSize: 50,
         fontWeight: 'bold',
         color: '#fff',
     },
     subTitleText: {
+        ...baseStyle.text,
         fontSize: 35,
         color: '#fff',
         marginTop: 10,
@@ -56,6 +58,7 @@ export default StyleSheet.create({
     negativeButton: {
         backgroundColor: null,
         flex: 1,
+        paddingLeft: 5,
         marginRight: 70,
         justifyContent: 'flex-start',
     },

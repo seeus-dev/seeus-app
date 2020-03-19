@@ -10,6 +10,5 @@ export default StyleSheet.create({
     },
     text: {
         fontSize: 14,
-        flex: 1
     }
 });
