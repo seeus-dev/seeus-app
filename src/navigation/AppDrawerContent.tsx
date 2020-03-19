@@ -1,5 +1,5 @@
 import React from "react";
-import {Platform, StatusBar, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {Image, Platform, StatusBar, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {DrawerContentScrollView, DrawerItem, DrawerItemList} from "@react-navigation/drawer";
 import {Linking} from "expo";
 import {FontAwesome} from "@expo/vector-icons";
@@ -18,7 +18,10 @@ export default function AppDrawerContent(props) {
     const doLogout = () => authDispatch({type: AuthActionType.Logout});
     return (
         <>
-            <Header name={authState.user.username} email={authState.user.eid}/>
+            <Header name={authState.user.name || authState.user.username}
+                    email={authState.user.eid}
+                    imageUrl={authState.user.imageUrl}
+            />
             <DrawerContentScrollView style={styles.scrollView} {...props}>
                 <DrawerItemList
                     itemStyle={styles.drawerItem}
@@ -38,10 +41,11 @@ export default function AppDrawerContent(props) {
     );
 }
 
-function Header({name, email}) {
+function Header({name, email, imageUrl}) {
+    const image = imageUrl ? { uri: imageUrl } : require('../../assets/user-icon.png');
     return (
         <View style={styles.header}>
-            <View style={styles.headerUserImage}/>
+            <Image source={image} style={styles.headerUserImage}/>
             <View style={styles.headerUserInfoContainer}>
                 <Text style={styles.headerUserName}>{name}</Text>
                 <Text style={styles.headerUserEmail}>{email}</Text>
@@ -89,9 +93,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     headerUserImage: {
-        backgroundColor: '#222',
-        width: 65,
-        height: 65,
+        width: 70,
+        height: 70,
         borderRadius: 100
     },
     headerUserInfoContainer: {
