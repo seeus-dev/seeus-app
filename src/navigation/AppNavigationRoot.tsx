@@ -10,10 +10,10 @@ import RequestsScreen from "../screens/RequestsScreen";
 import HoursScreen from "../screens/HoursScreen";
 import HelpScreen from "../screens/HelpScreen";
 import SettingsScreen from "../screens/SettingsScreen";
-import AppDrawerContent from "./AppDrawerContent";
-
-import {useAuthState} from "../contexts/AuthContext";
 import OauthWebViewScreen from "../screens/login/OauthWebViewScreen";
+import EnterEidScreen from "../screens/login/EnterEidScreen";
+import AppDrawerContent from "./AppDrawerContent";
+import {useAuthState, UserInfo} from "../contexts/AuthContext";
 
 
 function LoggedOutNavigator() {
@@ -29,7 +29,7 @@ function LoggedOutNavigator() {
     );
 }
 
-function LoggedInNavigator() {
+function LoggedInMainNav() {
     const Drawer = createDrawerNavigator();
     return (
         <Drawer.Navigator drawerContent={props => <AppDrawerContent {...props} />}>
@@ -46,11 +46,24 @@ function LoggedInNavigator() {
     );
 }
 
+function LoggedInOnboardingNav() {
+    const Stack = createStackNavigator();
+    return (
+        <Stack.Navigator headerMode="none">
+            <Stack.Screen name="EnterEid" component={EnterEidScreen}/>
+        </Stack.Navigator>
+    );
+}
+
+function LoggedInNavigator({user}: { user: UserInfo }) {
+    return user.eid ? <LoggedInMainNav/> : <LoggedInOnboardingNav/>;
+}
+
 export default function AppNavigationRoot() {
     const authState = useAuthState();
     return (
         <NavigationContainer>
-            {authState.isLoggedIn ? <LoggedInNavigator/> : <LoggedOutNavigator/>}
+            {authState.isLoggedIn ? <LoggedInNavigator user={authState.user}/> : <LoggedOutNavigator/>}
         </NavigationContainer>
     );
 }

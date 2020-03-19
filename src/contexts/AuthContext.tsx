@@ -5,7 +5,7 @@ export enum AuthActionType {
     Logout = 'logout'
 }
 
-type UserInfo = {
+export type UserInfo = {
     username: string,
     eid?: string,
 };

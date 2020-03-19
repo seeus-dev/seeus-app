@@ -10,6 +10,7 @@ type ButtonProps = {
     activeOpacity?: number,
     showShadow?: boolean,
     children?: ReactChild,
+    childrenBefore?: boolean,
 }
 
 export default function Button(props: ButtonProps) {
@@ -18,8 +19,9 @@ export default function Button(props: ButtonProps) {
     const labelStyle = {...styles.label, ...props.labelStyle};
     return (
         <TouchableOpacity activeOpacity={props.activeOpacity || 0.5} style={buttonStyle} onPress={props.onPress}>
+            {props.childrenBefore && props.children}
             {props.label && <Text style={labelStyle}>{props.label}</Text>}
-            {props.children}
+            {!props.childrenBefore && props.children}
         </TouchableOpacity>
     );
 }

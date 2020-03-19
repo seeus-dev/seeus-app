@@ -4,7 +4,7 @@ import {FontAwesome} from "@expo/vector-icons";
 import baseStyle from "../../styles/base";
 import Button from "../../components/Button";
 import colors, {theme} from "../../styles/colors";
-
+import onboardingStyle from './onboarding-screen-style';
 
 export default function LoginScreen({navigation}) {
     const [username, setUsername] = useState("");
@@ -17,8 +17,8 @@ export default function LoginScreen({navigation}) {
     return (
         <View style={styles.container}>
             <View>
-                <Text style={styles.headerText}>Hello.</Text>
-                <Text style={styles.headerTextSmaller}>Let's start by entering your NetID</Text>
+                <Text style={styles.titleText}>Welcome</Text>
+                <Text style={styles.subTitleText}>Let's start by entering your NetID</Text>
             </View>
             <View style={{flexDirection: 'row'}}>
                 <UsernameInput username={username} onChange={setUsername}/>
@@ -26,14 +26,14 @@ export default function LoginScreen({navigation}) {
             <View style={{flexDirection: 'row'}}>
                 <Button label="Cancel"
                         onPress={() => navigation.goBack()}
-                        style={styles.cancelButton}
-                        labelStyle={styles.cancelButtonLabel}
+                        style={styles.negativeButton}
+                        labelStyle={styles.negativeButtonLabel}
                 />
                 <Button label="Continue"
                         onPress={submit}
                         showShadow={true}
-                        style={styles.submitButton}
-                        labelStyle={styles.submitButtonLabel}>
+                        style={styles.positiveButton}
+                        labelStyle={styles.positiveButtonLabel}>
                     <FontAwesome name="arrow-right" size={18}/>
                 </Button>
             </View>
@@ -55,78 +55,26 @@ function UsernameInput({username, onChange}) {
 
     return (
         <TouchableWithoutFeedback onPress={focusInput}>
-            <View style={styles.usernameInputContainer}>
+            <View style={styles.inputContainer}>
                 <TextInput value={username}
                            onChangeText={text => setUsername(text)}
                            ref={usernameInputRef}
-                           style={styles.usernameInput}
+                           style={styles.input}
                            accessibilityHint="NetID Username"
                            autoFocus={true}
                            autoCorrect={false}
                            autoCapitalize="none"
                 />
-                <Text style={styles.emichEmailText}>@emich.edu</Text>
+                <Text style={styles.inputStaticText}>@emich.edu</Text>
             </View>
         </TouchableWithoutFeedback>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        ...baseStyle.container,
-        backgroundColor: theme.primary,
-        justifyContent: 'flex-start',
-        paddingTop: 50,
-        padding: 20,
-    },
-    headerText: {
-        fontSize: 50,
-        fontWeight: 'bold',
-        color: '#fff',
-    },
-    headerTextSmaller: {
-        fontSize: 35,
-        color: '#fff',
-    },
-    usernameInputContainer: {
-        marginTop: 50,
-        paddingRight: 10,
-        backgroundColor: theme.primaryLighter,
-        borderRadius: 5,
-        alignItems: 'center',
-        flex: 1,
+    ...onboardingStyle,
+    inputContainer: {
+        ...onboardingStyle.inputContainer,
         flexDirection: 'row',
     },
-    usernameInput: {
-        minWidth: 0,
-        paddingVertical: 20,
-        paddingLeft: 15,
-        paddingRight: 5,
-        marginRight: 0,
-        flex: 1,
-        color: '#fff',
-        fontSize: 30,
-        backgroundColor: null,
-    },
-    emichEmailText: {
-        fontSize: 30,
-        color: '#fff',
-        opacity: 0.6,
-    },
-    submitButton: {
-        backgroundColor: colors.seeusYellow,
-        flex: 1,
-    },
-    submitButtonLabel: {
-        fontWeight: 'bold'
-    },
-    cancelButton: {
-        backgroundColor: null,
-        flex: 1,
-        marginRight: 70,
-        justifyContent: 'flex-start',
-    },
-    cancelButtonLabel: {
-        color: '#fff',
-    }
 });
