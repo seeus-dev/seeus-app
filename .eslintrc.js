@@ -20,9 +20,13 @@ module.exports = {
     },
     rules: {
         'prettier/prettier': 'warn',
-        'no-unused-vars': 'warn',
         'object-curly-spacing': [2, 'always'],
+
+        'no-unused-vars': 'off', // prevent duplicate errors with @typescript-eslint/no-unused-vars
+        '@typescript-eslint/no-unused-vars': 'warn',
+
         '@typescript-eslint/no-use-before-define': 'off',
+        '@typescript-eslint/explicit-function-return-type': 'off',
     },
     settings: {
         react: {
