@@ -1,9 +1,8 @@
 import React from 'react';
-import { Image, StyleSheet, TouchableOpacity, View, Text } from 'react-native';
-
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import Button from '../components/Button';
 import baseStyle from '../styles/base';
 import colors, { theme } from '../styles/colors';
-import Button from '../components/Button';
 
 export default function EntryScreen(props: any) {
   return (
