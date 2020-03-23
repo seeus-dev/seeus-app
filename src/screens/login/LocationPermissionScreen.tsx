@@ -14,44 +14,32 @@ export default function LocationPermissionScreen({navigation}) {
             'Location Disabled',
             'Your location will not be used in the SEEUS app. You can change this anytime by going to settings in the drawer menu.',
             [
-                {text: 'OK', onPress: () => appDispatch({type: AppActionType.RequestedLocationPermission})}
+                {text: 'OK', onPress: () => appDispatch({type: AppActionType.SetLocationDisabled})}
             ],
         );
     };
     const enableLocation = async () => {
-        const enabled = await location.requestPermission();
+        const enabled: boolean = await location.requestPermissionBoolean();
         if (!enabled) {
             showLocationDisabledDialog();
+        } else {
+            appDispatch({type: AppActionType.SetLocationEnabled});
         }
-        appDispatch({type: AppActionType.RequestedLocationPermission});
-    };
-    const skip = () => {
-        location.setHaveRequestedLocation(true);
-        showLocationDisabledDialog();
     };
 
     return (
         <View style={styles.container}>
             <View>
                 <Text style={styles.titleText}>Location</Text>
-                <Text style={styles.subTitleText}>To best experience the SEEUS app, allow location services</Text>
-                <Button label="Enable Location"
+                <Text style={styles.subTitleText}>SEEUS uses your location to display the EMU campus map, list nearby locations, and to help our dispatcher send the nearest walking group.</Text>
+                <Button label="Continue"
                         onPress={enableLocation}
-                        showShadow={true}
+                        showShadow
                         style={styles.positiveButton}
                         labelStyle={styles.positiveButtonLabel}>
-                    <FontAwesome name="location-arrow" size={27} style={{marginRight: 10}}/>
+                    <FontAwesome name="location-arrow" size={30} style={{marginRight: 10}}/>
                 </Button>
-                <Text style={styles.furtherDescriptionText}>
-                    Your location is used to display the campus map and nearby locations, and shared with the SEEUS
-                    dispatcher only when you submit a request.
-                </Text>
             </View>
-            <Button label="Skip"
-                    onPress={skip}
-                    style={styles.negativeButton}
-                    labelStyle={styles.negativeButtonLabel}
-            />
         </View>
     );
 }
@@ -60,17 +48,6 @@ const styles = StyleSheet.create({
     ...onboardingStyle,
     container: {
         ...onboardingStyle.container,
-        justifyContent: 'space-between',
-    },
-    inputContainer: {
-        ...onboardingStyle.inputContainer,
-        flexDirection: 'row',
-        paddingLeft: 20,
-        marginTop: 15
-    },
-    input: {
-        ...onboardingStyle.input,
-        paddingLeft: 5
     },
     subTitleText: {
         ...onboardingStyle.subTitleText,
@@ -88,12 +65,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         flex: 0,
         flexDirection: 'row-reverse',
-        paddingVertical: 25,
+        paddingVertical: 30,
         paddingHorizontal: 30
     },
     positiveButtonLabel: {
         ...onboardingStyle.positiveButtonLabel,
-        fontSize: 27,
+        fontSize: 30,
     },
     negativeButton: {
         ...onboardingStyle.negativeButton,

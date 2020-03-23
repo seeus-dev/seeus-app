@@ -1,25 +1,37 @@
 import {AsyncStorage} from 'react-native';
 import * as Location from 'expo-location';
+import {PermissionResponse, PermissionStatus} from 'expo-location';
 
 const REQUESTED_PERMISSION_KEY = 'requestedLocationPermission';
 
-
-async function hasPermission(): Promise<boolean> {
-    const {status} = await requestPermission();
-    return status === 'granted';
+async function requestPermission(): Promise<PermissionResponse> {
+    const perm = await Location.requestPermissionsAsync();
+    await savePermission(perm.status === PermissionStatus.GRANTED);
+    return perm;
 }
 
-async function requestPermission() {
-    await setHaveRequestedLocation(true);
-    return Location.requestPermissionsAsync();
+async function requestPermissionBoolean(): Promise<boolean> {
+    return requestPermission().then(perm => perm.status === PermissionStatus.GRANTED);
 }
 
-async function haveRequestedPermission(): Promise<boolean> {
-    return !!(await AsyncStorage.getItem(REQUESTED_PERMISSION_KEY));
+async function hasPermissionCached(doRequest: boolean = false): Promise<boolean> {
+    const val = await AsyncStorage.getItem(REQUESTED_PERMISSION_KEY);
+    if(doRequest && val == undefined) {
+        return requestPermissionBoolean();
+    }
+    return val === 'yes';
 }
 
-function setHaveRequestedLocation(value: boolean, appDispatch = undefined) {
+async function hasPreviouslyRequested() {
+    return await getSavedPermission() !== undefined;
+}
+
+function savePermission(value: boolean) {
     return AsyncStorage.setItem(REQUESTED_PERMISSION_KEY, value ? 'yes' : 'no');
+}
+
+function getSavedPermission() {
+    return AsyncStorage.getItem(REQUESTED_PERMISSION_KEY);
 }
 
 async function getCurrentLocation() {
@@ -27,9 +39,9 @@ async function getCurrentLocation() {
 }
 
 export default {
-    hasPermission,
+    hasPreviouslyRequested,
     requestPermission,
+    requestPermissionBoolean,
     getCurrentLocation,
-    haveRequestedPermission,
-    setHaveRequestedLocation
+    hasPermissionCached,
 };

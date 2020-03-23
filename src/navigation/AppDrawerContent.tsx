@@ -16,6 +16,9 @@ export default function AppDrawerContent(props) {
     const authDispatch = useAuthDispatch();
     const authState = useAuthState();
     const doLogout = () => authDispatch({type: AuthActionType.Logout});
+    if(!authState.isLoggedIn) {
+        return null;
+    }
     return (
         <>
             <Header name={authState.user.name || authState.user.username}

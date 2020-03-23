@@ -4,21 +4,23 @@ import locationService from "../services/location";
 export enum AppActionType {
     ShowOnboarding = 'show onboarding',
     HideOnboarding = 'hide onboarding',
-    RequestedLocationPermission = 'requested location permission',
-    ResetRequestedLocationPermission = 'reset requested location permission',
+    SetLocationEnabled = 'set location permission enabled',
+    SetLocationDisabled = 'set location permission disabled',
 }
 
 type Action = {
     type: AppActionType,
-    value?: boolean
+    value?: any
 }
 type Dispatch = (action: Action) => void
 type State = {
-    hasRequestedLocationPerm: boolean,
+    hasLocationPermission: boolean,
+    hasRequestedLocationPermission: boolean,
     showOnboarding: boolean,
 }
 const initialState: State = {
-    hasRequestedLocationPerm: false,
+    hasLocationPermission: undefined,
+    hasRequestedLocationPermission: false,
     showOnboarding: true,
 };
 
@@ -31,18 +33,18 @@ function reducer(state: State, action: Action): State {
             return {...state, showOnboarding: false};
         case AppActionType.ShowOnboarding:
             return {...state, showOnboarding: true};
-        case AppActionType.RequestedLocationPermission:
-            return {...state, hasRequestedLocationPerm: true};
-        case AppActionType.ResetRequestedLocationPermission:
-            return {...state, hasRequestedLocationPerm: false};
+        case AppActionType.SetLocationEnabled:
+            return {...state, hasLocationPermission: true, hasRequestedLocationPermission: true};
+        case AppActionType.SetLocationDisabled:
+            return {...state, hasLocationPermission: false, hasRequestedLocationPermission: true};
     }
 }
 
 export function useEffectPopulateAppState(dispatch) {
     React.useEffect(() => {
-        locationService.haveRequestedPermission().then(requested => {
+        locationService.hasPermissionCached().then(requested => {
             if (requested) {
-                dispatch({type: AppActionType.RequestedLocationPermission});
+                dispatch({type: AppActionType.SetLocationEnabled});
             }
         });
     }, []);
@@ -65,8 +67,4 @@ export function useAppState() {
 
 export function useAppDispatch() {
     return React.useContext(AppDispatchContext);
-}
-
-export function useAuth() {
-    return [useAppState(), useAppDispatch()];
 }

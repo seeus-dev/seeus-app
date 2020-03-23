@@ -15,24 +15,48 @@ import EnterEidScreen from "../screens/login/EnterEidScreen";
 import AppDrawerContent from "./AppDrawerContent";
 import LocationPermissionScreen from "../screens/login/LocationPermissionScreen";
 import {useAppDispatch, useAppState, useEffectPopulateAppState} from "../contexts/AppContext";
-import {useAuthState, UserInfo} from "../contexts/AuthContext";
+import {useAuthState} from "../contexts/AuthContext";
 
-const Stack = createStackNavigator();
-const Drawer = createDrawerNavigator();
+const RootStack = createStackNavigator();
 
-function LoggedOutNavigator() {
+export default function AppNavigationRoot() {
+    const authState = useAuthState();
+    const appState = useAppState();
+    const appDispatch = useAppDispatch();
+    useEffectPopulateAppState(appDispatch);
+
+    console.log('Root component render. Auth state = ', authState);
     return (
-        <Stack.Navigator headerMode="none" screenOptions={{
-            animationTypeForReplace: 'pop'
-        }}>
-            <Stack.Screen name="Entry" component={EntryScreen}/>
-            <Stack.Screen name="Login" component={LoginScreen}/>
-            <Stack.Screen name="OauthWebView" component={OauthWebViewScreen}/>
-        </Stack.Navigator>
+        <NavigationContainer>
+            <RootStack.Navigator headerMode="none" screenOptions={{gestureEnabled: false}}>
+                {authState.isLoggedIn ? getLoggedInScreens(authState, appState) : getLoggedOutScreens()}
+            </RootStack.Navigator>
+        </NavigationContainer>
     );
 }
 
-function LoggedInMainNav() {
+function getLoggedOutScreens() {
+    return (
+        <>
+            <RootStack.Screen name="Entry" component={EntryScreen}/>
+            <RootStack.Screen name="Login" component={LoginScreen}/>
+            <RootStack.Screen name="OauthWebView" component={OauthWebViewScreen}/>
+        </>
+    );
+}
+
+function getLoggedInScreens(authState, appState) {
+    if (authState.user.eid) {
+        return <RootStack.Screen name="EnterEid" component={EnterEidScreen}/>;
+    } else if (!appState.hasRequestedLocationPermission) {
+        return <RootStack.Screen name="LocationPermission" component={LocationPermissionScreen}/>;
+    }
+    return <RootStack.Screen name="LoggedInDrawer" component={LoggedInDrawerNav}/>;
+}
+
+const Drawer = createDrawerNavigator();
+
+function LoggedInDrawerNav() {
     return (
         <Drawer.Navigator drawerContent={props => <AppDrawerContent {...props} />}>
             <Drawer.Screen
@@ -45,47 +69,5 @@ function LoggedInMainNav() {
             <Drawer.Screen name="Help" component={HelpScreen}/>
             <Drawer.Screen name="Settings" component={SettingsScreen}/>
         </Drawer.Navigator>
-    );
-}
-
-function LoggedInNewUserNav() {
-    return (
-        <Stack.Navigator headerMode="none">
-            <Stack.Screen name="EnterEid" component={EnterEidScreen}/>
-        </Stack.Navigator>
-    );
-}
-
-function LoggedInAppOnboarding() {
-    return (
-        <Stack.Navigator headerMode="none">
-            <Stack.Screen name="LocationPermission" component={LocationPermissionScreen}/>
-        </Stack.Navigator>
-    );
-}
-
-function LoggedInNavigator({ user }: { user: UserInfo }) {
-    const {hasRequestedLocationPerm} = useAppState();
-    const showOnboarding = !hasRequestedLocationPerm;
-
-    if (!user.eid) {
-        return <LoggedInNewUserNav/>;
-    }
-    if (showOnboarding) {
-        return <LoggedInAppOnboarding />;
-    }
-    return <LoggedInMainNav/>;
-}
-
-export default function AppNavigationRoot() {
-    const authState = useAuthState();
-    const appDispatch = useAppDispatch();
-    useEffectPopulateAppState(appDispatch);
-
-    console.log('Root component render. Auth state = ', authState);
-    return (
-        <NavigationContainer>
-            {authState.isLoggedIn ? <LoggedInNavigator user={authState.user}/> : <LoggedOutNavigator/>}
-        </NavigationContainer>
     );
 }
