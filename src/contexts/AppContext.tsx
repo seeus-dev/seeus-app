@@ -40,10 +40,10 @@ function reducer(state: State, action: Action): State {
     }
 }
 
-export function useEffectPopulateAppState(dispatch) {
+export function usePopulateAppState(dispatch) {
     React.useEffect(() => {
-        locationService.hasPermissionCached().then(requested => {
-            if (requested) {
+        locationService.hasPermissionCached().then(perm => {
+            if (perm) {
                 dispatch({type: AppActionType.SetLocationEnabled});
             }
         });

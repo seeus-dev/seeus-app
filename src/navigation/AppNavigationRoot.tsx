@@ -14,7 +14,7 @@ import OauthWebViewScreen from "../screens/login/OauthWebViewScreen";
 import EnterEidScreen from "../screens/login/EnterEidScreen";
 import AppDrawerContent from "./AppDrawerContent";
 import LocationPermissionScreen from "../screens/login/LocationPermissionScreen";
-import {useAppDispatch, useAppState, useEffectPopulateAppState} from "../contexts/AppContext";
+import {useAppDispatch, useAppState, usePopulateAppState} from "../contexts/AppContext";
 import {useAuthState} from "../contexts/AuthContext";
 
 const RootStack = createStackNavigator();
@@ -23,7 +23,7 @@ export default function AppNavigationRoot() {
     const authState = useAuthState();
     const appState = useAppState();
     const appDispatch = useAppDispatch();
-    useEffectPopulateAppState(appDispatch);
+    usePopulateAppState(appDispatch);
 
     console.log('Root component render. Auth state = ', authState);
     return (
