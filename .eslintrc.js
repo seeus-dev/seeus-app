@@ -20,7 +20,6 @@ module.exports = {
     },
     rules: {
         'prettier/prettier': 'warn',
-        'no-unused-vars': 'warn',
         'object-curly-spacing': [2, 'always'],
         '@typescript-eslint/no-use-before-define': 'off',
         '@typescript-eslint/explicit-function-return-type': 'off',
