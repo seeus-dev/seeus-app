@@ -19,7 +19,7 @@ export default function LocationPermissionScreen() {
           onPress: () =>
             appDispatch({ type: AppActionType.RequestedLocationPermission }),
         },
-      ]
+      ],
     );
   };
   const enableLocation = async () => {

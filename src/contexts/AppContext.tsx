@@ -40,7 +40,7 @@ function reducer(state: State, action: Action): State {
 
 export function useEffectPopulateAppState(dispatch) {
   React.useEffect(() => {
-    locationService.haveRequestedPermission().then((requested) => {
+    locationService.haveRequestedPermission().then(requested => {
       if (requested) {
         dispatch({ type: AppActionType.RequestedLocationPermission });
       }

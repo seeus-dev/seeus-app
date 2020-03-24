@@ -37,7 +37,7 @@ export default function EnterEidScreen() {
           onPress: () => authDispatch({ type: AuthActionType.Logout }),
         },
       ],
-      { cancelable: true }
+      { cancelable: true },
     );
   };
 
@@ -83,7 +83,7 @@ function EidInput(props: { eid: string; onChange: (string) => void }) {
         <Text style={styles.inputStaticText}>E-</Text>
         <TextInput
           value={eid}
-          onChangeText={(text) => onChange(cleanEid(text))}
+          onChangeText={text => onChange(cleanEid(text))}
           ref={eidInputRef}
           style={styles.input}
           accessibilityHint="EID"

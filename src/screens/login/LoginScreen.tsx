@@ -62,7 +62,7 @@ function UsernameInput(props: {
       <View style={styles.inputContainer}>
         <TextInput
           value={username}
-          onChangeText={(text) => onChange(cleanUsername(text))}
+          onChangeText={text => onChange(cleanUsername(text))}
           ref={usernameInputRef}
           style={styles.input}
           accessibilityHint="NetID Username"

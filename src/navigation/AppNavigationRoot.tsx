@@ -43,9 +43,7 @@ function LoggedOutNavigator() {
 
 function LoggedInMainNav() {
   return (
-    <Drawer.Navigator
-      drawerContent={(props) => <AppDrawerContent {...props} />}
-    >
+    <Drawer.Navigator drawerContent={props => <AppDrawerContent {...props} />}>
       <Drawer.Screen
         name="Main"
         component={NewRequestScreen}

@@ -17,13 +17,13 @@ export default function OauthWebViewScreen({ route, navigation }: any) {
   const [loading, setLoading] = useState(true);
 
   const onWebViewNavigate = useCallback(
-    (event) => {
+    event => {
       if (event.canGoBack && event.loading) {
         console.log('Logging in. Web View Event = ', event);
         authDispatch({ type: AuthActionType.Login, user: { username } });
       }
     },
-    [username]
+    [username],
   );
 
   const webViewInjectedJs = `

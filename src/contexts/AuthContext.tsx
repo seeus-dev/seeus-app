@@ -37,7 +37,7 @@ const initialState: State = {
 
 const AuthStateContext = React.createContext<State | undefined>(undefined);
 const AuthDispatchContext = React.createContext<Dispatch | undefined>(
-  undefined
+  undefined,
 );
 
 function reducer(state: State, action: Action): State {
