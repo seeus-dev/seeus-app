@@ -46,7 +46,7 @@ function getLoggedOutScreens() {
 }
 
 function getLoggedInScreens(authState, appState) {
-    if (authState.user.eid) {
+    if (!authState.user.eid) {
         return <RootStack.Screen name="EnterEid" component={EnterEidScreen}/>;
     } else if (!appState.hasRequestedLocationPermission) {
         return <RootStack.Screen name="LocationPermission" component={LocationPermissionScreen}/>;

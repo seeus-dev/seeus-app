@@ -10,16 +10,22 @@ export default function OauthWebViewScreen({route, navigation}) {
     const authDispatch = useAuthDispatch();
     const [loading, setLoading] = useState(true);
 
-    const onWebViewNavigate = useCallback((event) => {
-        if (event.canGoBack && event.loading) {
-            console.log("Logging in. Web View Event = ", event);
-            authDispatch({type: AuthActionType.Login, user: {username}});
-        }
+    const onWebViewMessage = useCallback((event) => {
+        const msg = event.nativeEvent.data;
+        console.log("Logging in. Web View Message = ", msg);
+        authDispatch({type: AuthActionType.Login, user: {username}});
     }, [username]);
 
     const webViewInjectedJs = `
         document.getElementById('username').value = '${username}';
         document.getElementById('password').value = '';
+        document.getElementById('fm1').onsubmit = function(event) {
+            event.preventDefault();
+            if(window.ReactNativeWebView) {
+                window.ReactNativeWebView.postMessage('submit');
+            }
+            return false;
+        };
     `;
 
     // TODO: use oauth url here (url from backend which will redirect to google/emich login page)
@@ -39,10 +45,11 @@ export default function OauthWebViewScreen({route, navigation}) {
                          originWhitelist={['*']}
                          allowsLinkPreview={false}
                          injectedJavaScript={webViewInjectedJs}
-                         onNavigationStateChange={onWebViewNavigate}
                          style={styles.webView}
+                         onShouldStartLoadWithRequest={() => true}
                          onLoadStart={() => setLoading(true)}
                          onLoadEnd={() => setLoading(false)}
+                         onMessage={onWebViewMessage}
                          accessibilityHint="emich.edu login"
                 />
             </View>

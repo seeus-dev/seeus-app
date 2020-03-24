@@ -43,7 +43,7 @@ function reducer(state: State, action: Action): State {
         case AuthActionType.Login:
             return {...state, isLoggedIn: true, user: action.user as UserInfo};
         case AuthActionType.Logout:
-            return {...state, isLoggedIn: false, user: null};
+            return {...state, isLoggedIn: false, user: { username: null }};
         case AuthActionType.UpdateAuthUser:
             return {...state, user: {...state.user, ...action.user}};
     }
