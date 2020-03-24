@@ -23,6 +23,10 @@ module.exports = {
         'no-unused-vars': 'warn',
         'object-curly-spacing': [2, 'always'],
         '@typescript-eslint/no-use-before-define': 'off',
+        '@typescript-eslint/explicit-function-return-type': 'off',
+
+        'no-unused-vars': 'off', // prevent duplicate errors with @typescript-eslint/no-unused-vars
+        '@typescript-eslint/no-unused-vars': 'warn',
     },
     settings: {
         react: {
