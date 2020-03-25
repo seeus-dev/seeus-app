@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, StyleSheet, TouchableHighlight, TouchableOpacity, View, Text} from "react-native";
+import {Image, StyleSheet, TouchableOpacity, View, Text, Dimensions} from "react-native";
 import baseStyle from "../styles/base";
 import colors, {theme} from "../styles/colors";
 import Button from "../components/Button";
@@ -8,7 +8,9 @@ export default function EntryScreen(props) {
     return (
         <View style={styles.container}>
             <View style={styles.content}>
-                <Image style={styles.logo} source={require('../../assets/seeus-logo.png')}/>
+                <View style={styles.logoContainer}>
+                    <Image style={styles.logo} source={require('../../assets/seeus-logo.png')}/>
+                </View>
                 <Button label="Login with NetID"
                         style={styles.loginButton}
                         labelStyle={styles.loginButtonText}
@@ -26,9 +28,14 @@ const styles = StyleSheet.create({
     container: {
         ...baseStyle.container,
         backgroundColor: theme.primary,
+        paddingBottom: 0,
+    },
+    logoContainer: {
+        flexDirection: 'row',
+        width: '80%',
     },
     logo: {
-        marginBottom: 30,
+        marginBottom: 10,
     },
     loginButton: {
         backgroundColor: colors.seeusYellow,

@@ -2,29 +2,50 @@ import React from 'react';
 
 export enum AuthActionType {
     Login = 'login',
-    Logout = 'logout'
+    Logout = 'logout',
+    UpdateAuthUser = 'update auth user',
 }
 
-type Action = { type: AuthActionType, username?: string }
+export type UserInfo = {
+    username: string,
+    name?: string,
+    eid?: string,
+    imageUrl?: string,
+};
+
+// all fields optional because this is a "diff"; it's merged with existing user object in UpdateAuthUser action
+type UserInfoDiff = {
+    username?: string,
+    name?: string,
+    eid?: string,
+    imageUrl?: string,
+};
+
+type Action = {
+    type: AuthActionType,
+    user?: UserInfoDiff
+}
 type Dispatch = (action: Action) => void
 type State = {
     isLoggedIn: boolean,
-    username: string,
+    user: UserInfo,
 }
 const initialState: State = {
     isLoggedIn: false,
-    username: null
+    user: null,
 };
 
 const AuthStateContext = React.createContext<State | undefined>(undefined);
 const AuthDispatchContext = React.createContext<Dispatch | undefined>(undefined);
 
-function reducer(state: State, action: Action) {
+function reducer(state: State, action: Action): State {
     switch (action.type) {
         case AuthActionType.Login:
-            return {...state, isLoggedIn: true, username: action.username};
+            return {...state, isLoggedIn: true, user: action.user as UserInfo};
         case AuthActionType.Logout:
-            return {...state, isLoggedIn: false, username: null};
+            return {...state, isLoggedIn: false, user: { username: null }};
+        case AuthActionType.UpdateAuthUser:
+            return {...state, user: {...state.user, ...action.user}};
     }
 }
 

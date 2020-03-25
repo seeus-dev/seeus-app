@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import {Platform, StatusBar, StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
     container: {
@@ -6,9 +6,9 @@ export default StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'column',
+        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
     },
     text: {
         fontSize: 14,
-        flex: 1
     }
 });
