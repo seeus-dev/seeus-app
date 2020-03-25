@@ -19,6 +19,8 @@ export default function OauthWebViewScreen({route, navigation}) {
     const webViewInjectedJs = `
         document.getElementById('username').value = '${username}';
         document.getElementById('password').value = '';
+        
+        // temporary until we have our 'oauth complete' page in the webview to call postMessage
         document.getElementById('fm1').onsubmit = function(event) {
             event.preventDefault();
             if(window.ReactNativeWebView) {
