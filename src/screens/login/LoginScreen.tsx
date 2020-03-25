@@ -12,9 +12,11 @@ import onboardingStyle from './onboarding-screen-style';
 import { cleanUsername, focusTextInput } from '../../util';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-export default function LoginScreen(props: {
+type ScreenProps = {
   navigation: StackNavigationProp<any>;
-}) {
+};
+
+export default function LoginScreen(props: ScreenProps) {
   const [username, setUsername] = useState('');
   const submit = () => {
     if (username.length > 0) {

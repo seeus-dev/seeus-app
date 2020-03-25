@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import {
   ActivityIndicator,
   Dimensions,
@@ -12,23 +12,22 @@ import { AuthActionType, useAuthDispatch } from '../../contexts/AuthContext';
 import { AntDesign } from '@expo/vector-icons';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-export default function OauthWebViewScreen(props: {
+type ScreenProps = {
   route: any;
   navigation: StackNavigationProp<any>;
-}) {
+};
+
+export default function OauthWebViewScreen(props: ScreenProps) {
   const { route, navigation } = props;
   const { username } = route.params;
   const authDispatch = useAuthDispatch();
   const [loading, setLoading] = useState(true);
 
-  const onWebViewMessage = useCallback(
-    (event) => {
-      const msg = event.nativeEvent.data;
-      console.log('Logging in. Web View Message = ', msg);
-      authDispatch({ type: AuthActionType.Login, user: { username } });
-    },
-    [username]
-  );
+  const onWebViewMessage = (event) => {
+    const msg = event.nativeEvent.data;
+    console.log('Logging in. Web View Message = ', msg);
+    authDispatch({ type: AuthActionType.Login, user: { username } });
+  };
 
   const webViewInjectedJs = `
         document.getElementById('username').value = '${username}';
