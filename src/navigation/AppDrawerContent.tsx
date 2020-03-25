@@ -61,7 +61,8 @@ export default function AppDrawerContent(props) {
   );
 }
 
-function Header({ name, email, imageUrl }) {
+function Header(props: { name: string; email: string; imageUrl: string }) {
+  const { name, email, imageUrl } = props;
   const image = imageUrl
     ? { uri: imageUrl }
     : require('../../assets/user-icon.png');

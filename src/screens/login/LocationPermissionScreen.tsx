@@ -6,7 +6,7 @@ import onboardingStyle from './onboarding-screen-style';
 import location from '../../services/location';
 import { AppActionType, useAppDispatch } from '../../contexts/AppContext';
 
-export default function LocationPermissionScreen({ navigation }) {
+export default function LocationPermissionScreen() {
   const appDispatch = useAppDispatch();
 
   const showLocationDisabledDialog = () => {

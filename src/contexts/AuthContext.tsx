@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactChild } from 'react';
 
 export enum AuthActionType {
   Login = 'login',
@@ -51,7 +51,7 @@ function reducer(state: State, action: Action): State {
   }
 }
 
-export function AuthProvider({ children }) {
+export function AuthProvider({ children }: { children: ReactChild }) {
   const [state, dispatch] = React.useReducer(reducer, initialState);
   return (
     <AuthStateContext.Provider value={state}>

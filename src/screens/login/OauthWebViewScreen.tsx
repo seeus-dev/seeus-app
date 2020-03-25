@@ -10,8 +10,14 @@ import baseStyle from '../../styles/base';
 import WebView from 'react-native-webview';
 import { AuthActionType, useAuthDispatch } from '../../contexts/AuthContext';
 import { AntDesign } from '@expo/vector-icons';
+import { RouteProp } from '@react-navigation/core';
+import { StackNavigationProp } from '@react-navigation/stack';
 
-export default function OauthWebViewScreen({ route, navigation }) {
+export default function OauthWebViewScreen(props: {
+  route: RouteProp<any, any>;
+  navigation: StackNavigationProp<any>;
+}) {
+  const { route, navigation } = props;
   const { username } = route.params;
   const authDispatch = useAuthDispatch();
   const [loading, setLoading] = useState(true);

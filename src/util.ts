@@ -1,4 +1,4 @@
-import { MutableRefObject, Ref } from 'react';
+import { MutableRefObject } from 'react';
 import { TextInput } from 'react-native';
 
 export function focusTextInput(ref: MutableRefObject<TextInput>) {

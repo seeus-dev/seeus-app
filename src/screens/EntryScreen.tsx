@@ -1,17 +1,13 @@
 import React from 'react';
-import {
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-  Text,
-  Dimensions
-} from 'react-native';
+import { Image, StyleSheet, TouchableOpacity, View, Text } from 'react-native';
 import baseStyle from '../styles/base';
 import colors, { theme } from '../styles/colors';
 import Button from '../components/Button';
+import { StackNavigationProp } from '@react-navigation/stack';
 
-export default function EntryScreen(props) {
+export default function EntryScreen(props: {
+  navigation: StackNavigationProp<any>;
+}) {
   return (
     <View style={styles.container}>
       <View style={styles.content}>
@@ -29,7 +25,9 @@ export default function EntryScreen(props) {
           onPress={() => props.navigation.navigate('Login')}
         />
       </View>
-      <TouchableOpacity onPress={() => {}}>
+      <TouchableOpacity
+        onPress={() => alert('TODO: Navigate to the No Net ID Popup Screen')}
+      >
         <Text style={styles.noNetIdLink}>No NetID? Tap here</Text>
       </TouchableOpacity>
     </View>

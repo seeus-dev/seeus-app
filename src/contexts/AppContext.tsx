@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactChild } from 'react';
 import locationService from '../services/location';
 
 export enum AppActionType {
@@ -58,7 +58,7 @@ export function usePopulateAppState(dispatch) {
   }, []);
 }
 
-export function AppContextProvider({ children }) {
+export function AppContextProvider({ children }: { children: ReactChild }) {
   const [state, dispatch] = React.useReducer(reducer, initialState);
   return (
     <AppStateContext.Provider value={state}>

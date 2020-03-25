@@ -7,17 +7,18 @@ import {
   View
 } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
-import baseStyle from '../../styles/base';
 import Button from '../../components/Button';
-import colors, { theme } from '../../styles/colors';
 import onboardingStyle from './onboarding-screen-style';
 import { cleanUsername, focusTextInput } from '../../util';
+import { StackNavigationProp } from '@react-navigation/stack';
 
-export default function LoginScreen({ navigation }) {
+export default function LoginScreen(props: {
+  navigation: StackNavigationProp<any>;
+}) {
   const [username, setUsername] = useState('');
   const submit = () => {
     if (username.length > 0) {
-      navigation.navigate('OauthWebView', { username });
+      props.navigation.navigate('OauthWebView', { username });
     }
   };
 
@@ -26,7 +27,7 @@ export default function LoginScreen({ navigation }) {
       <View>
         <Text style={styles.titleText}>Welcome</Text>
         <Text style={styles.subTitleText}>
-          Let's start by entering your NetID
+          Let&apos;s start by entering your NetID
         </Text>
       </View>
       <View style={{ flexDirection: 'row' }}>
@@ -35,7 +36,7 @@ export default function LoginScreen({ navigation }) {
       <View style={{ flexDirection: 'row' }}>
         <Button
           label="Cancel"
-          onPress={() => navigation.goBack()}
+          onPress={() => props.navigation.goBack()}
           style={styles.negativeButton}
           labelStyle={styles.negativeButtonLabel}
         />
@@ -53,7 +54,11 @@ export default function LoginScreen({ navigation }) {
   );
 }
 
-function UsernameInput({ username, onChange }) {
+function UsernameInput(props: {
+  username: string;
+  onChange: (string) => void;
+}) {
+  const { username, onChange } = props;
   const usernameInputRef = useRef(null);
   return (
     <TouchableWithoutFeedback onPress={() => focusTextInput(usernameInputRef)}>

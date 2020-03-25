@@ -17,7 +17,7 @@ import {
 } from '../../contexts/AuthContext';
 import { cleanEid, focusTextInput } from '../../util';
 
-export default function EnterEidScreen({ navigation }) {
+export default function EnterEidScreen() {
   const [eid, setEid] = useState('');
   const authDispatch = useAuthDispatch();
   const { user } = useAuthState();
@@ -74,7 +74,8 @@ export default function EnterEidScreen({ navigation }) {
   );
 }
 
-function EidInput({ eid, onChange }) {
+function EidInput(props: { eid: string; onChange: (string) => void }) {
+  const { eid, onChange } = props;
   const eidInputRef = useRef(null);
   return (
     <TouchableWithoutFeedback onPress={() => focusTextInput(eidInputRef)}>
