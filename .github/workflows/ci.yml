@@ -22,7 +22,7 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: ESLint
-        run: yarn add github-actions-eslint-annotator && yarn run github-actions-eslint-annotator
+        run: yarn add @neovici/github-actions-eslint-annotator && yarn run github-actions-eslint-annotator
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PARTIAL_LINTING: true # on PRs
