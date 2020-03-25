@@ -4,7 +4,7 @@ import {
   Dimensions,
   StyleSheet,
   TouchableOpacity,
-  View
+  View,
 } from 'react-native';
 import baseStyle from '../../styles/base';
 import WebView from 'react-native-webview';
@@ -23,7 +23,7 @@ export default function OauthWebViewScreen(props: {
   const [loading, setLoading] = useState(true);
 
   const onWebViewMessage = useCallback(
-    event => {
+    (event) => {
       const msg = event.nativeEvent.data;
       console.log('Logging in. Web View Message = ', msg);
       authDispatch({ type: AuthActionType.Login, user: { username } });
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
   container: {
     ...baseStyle.container,
     flexDirection: 'column',
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
   },
   loadingContainer: {
     position: 'absolute',
@@ -92,16 +92,16 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255,255,255,0.8)',
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   loading: {},
   webViewContainer: {
     flexDirection: 'row',
-    flex: 1
+    flex: 1,
   },
   webView: {},
   backButton: {
     alignSelf: 'flex-start',
-    padding: 10
-  }
+    padding: 10,
+  },
 });

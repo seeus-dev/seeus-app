@@ -6,12 +6,12 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
 } from 'react-native';
 import {
   DrawerContentScrollView,
   DrawerItem,
-  DrawerItemList
+  DrawerItemList,
 } from '@react-navigation/drawer';
 import { Linking } from 'expo';
 import { FontAwesome } from '@expo/vector-icons';
@@ -21,7 +21,7 @@ import SeeusConstants from '../SeeusConstants';
 import {
   AuthActionType,
   useAuthDispatch,
-  useAuthState
+  useAuthState,
 } from '../contexts/AuthContext';
 
 /**
@@ -102,14 +102,14 @@ const styles = StyleSheet.create({
     paddingTop: 0,
     margin: 0,
     padding: 0,
-    backgroundColor: theme.primary
+    backgroundColor: theme.primary,
   },
   drawerItem: {
-    borderRadius: 5
+    borderRadius: 5,
   },
   drawerItemLabel: {
     color: '#fff',
-    fontSize: 23
+    fontSize: 23,
   },
   header: {
     backgroundColor: theme.secondary,
@@ -117,23 +117,23 @@ const styles = StyleSheet.create({
     paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight + 20 : 20,
     paddingBottom: 20,
     flexDirection: 'row',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   headerUserImage: {
     width: 70,
     height: 70,
-    borderRadius: 100
+    borderRadius: 100,
   },
   headerUserInfoContainer: {
     alignItems: 'center',
-    marginLeft: 15
+    marginLeft: 15,
   },
   headerUserName: {
     fontSize: 23,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   headerUserEmail: {
-    fontSize: 14
+    fontSize: 14,
   },
   footer: {
     paddingVertical: 10,
@@ -141,19 +141,19 @@ const styles = StyleSheet.create({
     backgroundColor: theme.primaryLighter,
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
   },
   footerText: {
-    color: '#fff'
+    color: '#fff',
   },
   footerIcons: {
     justifyContent: 'center',
     alignItems: 'center',
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   footerIcon: {
     marginHorizontal: 15,
     color: '#fff',
-    fontSize: 35
-  }
+    fontSize: 35,
+  },
 });

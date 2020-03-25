@@ -3,7 +3,7 @@ import React, { ReactChild } from 'react';
 export enum AuthActionType {
   Login = 'login',
   Logout = 'logout',
-  UpdateAuthUser = 'update auth user'
+  UpdateAuthUser = 'update auth user',
 }
 
 export type UserInfo = {
@@ -32,7 +32,7 @@ type State = {
 };
 const initialState: State = {
   isLoggedIn: false,
-  user: null
+  user: null,
 };
 
 const AuthStateContext = React.createContext<State | undefined>(undefined);

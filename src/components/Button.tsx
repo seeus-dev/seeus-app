@@ -4,7 +4,7 @@ import {
   Text,
   TextStyle,
   TouchableOpacity,
-  ViewStyle
+  ViewStyle,
 } from 'react-native';
 import { theme } from '../styles/colors';
 
@@ -45,19 +45,19 @@ const styles = StyleSheet.create({
 
     borderRadius: 3,
     flexDirection: 'row',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
   },
   buttonShadow: {
     shadowColor: '#111',
     shadowOffset: {
       width: 0,
-      height: 2
+      height: 2,
     },
     shadowOpacity: 0.2,
     shadowRadius: 2.62,
-    elevation: 3
+    elevation: 3,
   },
   label: {
-    fontSize: 20
-  }
+    fontSize: 20,
+  },
 });

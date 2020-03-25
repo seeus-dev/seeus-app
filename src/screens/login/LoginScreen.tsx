@@ -4,7 +4,7 @@ import {
   Text,
   TextInput,
   TouchableWithoutFeedback,
-  View
+  View,
 } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import Button from '../../components/Button';
@@ -65,7 +65,7 @@ function UsernameInput(props: {
       <View style={styles.inputContainer}>
         <TextInput
           value={username}
-          onChangeText={text => onChange(cleanUsername(text))}
+          onChangeText={(text) => onChange(cleanUsername(text))}
           ref={usernameInputRef}
           style={styles.input}
           accessibilityHint="NetID Username"
@@ -83,6 +83,6 @@ const styles = StyleSheet.create({
   ...onboardingStyle,
   inputContainer: {
     ...onboardingStyle.inputContainer,
-    flexDirection: 'row'
-  }
+    flexDirection: 'row',
+  },
 });

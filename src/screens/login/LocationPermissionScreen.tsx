@@ -17,8 +17,8 @@ export default function LocationPermissionScreen() {
         {
           text: 'OK',
           onPress: () =>
-            appDispatch({ type: AppActionType.SetLocationDisabled })
-        }
+            appDispatch({ type: AppActionType.SetLocationDisabled }),
+        },
       ]
     );
   };
@@ -60,18 +60,18 @@ export default function LocationPermissionScreen() {
 const styles = StyleSheet.create({
   ...onboardingStyle,
   container: {
-    ...onboardingStyle.container
+    ...onboardingStyle.container,
   },
   subTitleText: {
     ...onboardingStyle.subTitleText,
-    fontSize: 25
+    fontSize: 25,
   },
   furtherDescriptionText: {
     color: '#fff',
     fontSize: 20,
     fontStyle: 'italic',
     textAlign: 'center',
-    marginTop: 35
+    marginTop: 35,
   },
   positiveButton: {
     ...onboardingStyle.positiveButton,
@@ -79,25 +79,25 @@ const styles = StyleSheet.create({
     flex: 0,
     flexDirection: 'row-reverse',
     paddingVertical: 30,
-    paddingHorizontal: 30
+    paddingHorizontal: 30,
   },
   positiveButtonLabel: {
     ...onboardingStyle.positiveButtonLabel,
-    fontSize: 30
+    fontSize: 30,
   },
   negativeButton: {
     ...onboardingStyle.negativeButton,
     flex: 0,
     justifyContent: 'center',
-    marginRight: 0
+    marginRight: 0,
   },
   negativeButtonLabel: {
     ...onboardingStyle.negativeButtonLabel,
     fontSize: 15,
-    color: '#eee'
+    color: '#eee',
   },
   buttonContainer: {
     flex: 1,
-    justifyContent: 'space-between'
-  }
+    justifyContent: 'space-between',
+  },
 });

@@ -12,6 +12,6 @@ export default function HelpScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    ...baseStyle.container
-  }
+    ...baseStyle.container,
+  },
 });

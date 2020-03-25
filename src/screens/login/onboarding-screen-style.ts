@@ -8,19 +8,19 @@ export default StyleSheet.create({
     backgroundColor: theme.primary,
     justifyContent: 'flex-start',
     paddingTop: 50,
-    padding: 20
+    padding: 20,
   },
   titleText: {
     ...baseStyle.text,
     fontSize: 50,
     fontWeight: 'bold',
-    color: '#fff'
+    color: '#fff',
   },
   subTitleText: {
     ...baseStyle.text,
     fontSize: 35,
     color: '#fff',
-    marginTop: 10
+    marginTop: 10,
   },
   inputContainer: {
     marginTop: 50,
@@ -29,7 +29,7 @@ export default StyleSheet.create({
     borderRadius: 5,
     alignItems: 'center',
     flex: 1,
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   input: {
     minWidth: 0,
@@ -40,29 +40,29 @@ export default StyleSheet.create({
     flex: 1,
     color: '#fff',
     fontSize: 30,
-    backgroundColor: null
+    backgroundColor: null,
   },
   inputStaticText: {
     fontSize: 30,
     color: '#fff',
-    opacity: 0.6
+    opacity: 0.6,
   },
   positiveButton: {
     backgroundColor: colors.seeusYellow,
     flex: 1,
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
   },
   positiveButtonLabel: {
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   negativeButton: {
     backgroundColor: null,
     flex: 1,
     paddingLeft: 5,
     marginRight: 70,
-    justifyContent: 'flex-start'
+    justifyContent: 'flex-start',
   },
   negativeButtonLabel: {
-    color: '#fff'
-  }
+    color: '#fff',
+  },
 });

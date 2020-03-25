@@ -38,30 +38,30 @@ const styles = StyleSheet.create({
   container: {
     ...baseStyle.container,
     backgroundColor: theme.primary,
-    paddingBottom: 0
+    paddingBottom: 0,
   },
   logoContainer: {
     flexDirection: 'row',
-    width: '80%'
+    width: '80%',
   },
   logo: {
-    marginBottom: 10
+    marginBottom: 10,
   },
   loginButton: {
-    backgroundColor: colors.seeusYellow
+    backgroundColor: colors.seeusYellow,
   },
   loginButtonText: {
     fontSize: 28,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   content: {
     flex: 1,
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   noNetIdLink: {
     color: '#fff',
     fontSize: 18,
     fontWeight: 'bold',
-    paddingBottom: 15
-  }
+    paddingBottom: 15,
+  },
 });

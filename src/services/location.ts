@@ -12,7 +12,7 @@ async function requestPermission(): Promise<PermissionResponse> {
 
 async function requestPermissionBoolean(): Promise<boolean> {
   return requestPermission().then(
-    perm => perm.status === PermissionStatus.GRANTED
+    (perm) => perm.status === PermissionStatus.GRANTED
   );
 }
 
@@ -45,5 +45,5 @@ export default {
   requestPermission,
   requestPermissionBoolean,
   getCurrentLocation,
-  hasPermissionCached
+  hasPermissionCached,
 };

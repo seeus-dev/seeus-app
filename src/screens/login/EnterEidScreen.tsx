@@ -5,7 +5,7 @@ import {
   Text,
   TextInput,
   TouchableWithoutFeedback,
-  View
+  View,
 } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import Button from '../../components/Button';
@@ -13,7 +13,7 @@ import onboardingStyle from './onboarding-screen-style';
 import {
   AuthActionType,
   useAuthDispatch,
-  useAuthState
+  useAuthState,
 } from '../../contexts/AuthContext';
 import { cleanEid, focusTextInput } from '../../util';
 
@@ -34,8 +34,8 @@ export default function EnterEidScreen() {
         { text: 'Cancel', style: 'cancel' },
         {
           text: 'Logout',
-          onPress: () => authDispatch({ type: AuthActionType.Logout })
-        }
+          onPress: () => authDispatch({ type: AuthActionType.Logout }),
+        },
       ],
       { cancelable: true }
     );
@@ -83,7 +83,7 @@ function EidInput(props: { eid: string; onChange: (string) => void }) {
         <Text style={styles.inputStaticText}>E-</Text>
         <TextInput
           value={eid}
-          onChangeText={text => onChange(cleanEid(text))}
+          onChangeText={(text) => onChange(cleanEid(text))}
           ref={eidInputRef}
           style={styles.input}
           accessibilityHint="EID"
@@ -103,30 +103,30 @@ const styles = StyleSheet.create({
     ...onboardingStyle.inputContainer,
     flexDirection: 'row',
     paddingLeft: 20,
-    marginTop: 15
+    marginTop: 15,
   },
   input: {
     ...onboardingStyle.input,
-    paddingLeft: 5
+    paddingLeft: 5,
   },
   titleText: {
     ...onboardingStyle.titleText,
-    fontSize: 40
+    fontSize: 40,
   },
   subTitleText: {
     ...onboardingStyle.subTitleText,
-    fontSize: 25
+    fontSize: 25,
   },
   emailText: {
     color: '#fff',
     fontStyle: 'italic',
     fontSize: 20,
     alignSelf: 'flex-start',
-    marginTop: 40
+    marginTop: 40,
   },
   positiveButton: {
     ...onboardingStyle.positiveButton,
     justifyContent: 'center',
-    flexDirection: 'row-reverse'
-  }
+    flexDirection: 'row-reverse',
+  },
 });

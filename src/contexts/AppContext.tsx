@@ -5,7 +5,7 @@ export enum AppActionType {
   ShowOnboarding = 'show onboarding',
   HideOnboarding = 'hide onboarding',
   SetLocationEnabled = 'set location permission enabled',
-  SetLocationDisabled = 'set location permission disabled'
+  SetLocationDisabled = 'set location permission disabled',
 }
 
 type Action = {
@@ -21,7 +21,7 @@ type State = {
 const initialState: State = {
   hasLocationPermission: undefined,
   hasRequestedLocationPermission: false,
-  showOnboarding: true
+  showOnboarding: true,
 };
 
 const AppStateContext = React.createContext<State | undefined>(undefined);
@@ -37,20 +37,20 @@ function reducer(state: State, action: Action): State {
       return {
         ...state,
         hasLocationPermission: true,
-        hasRequestedLocationPermission: true
+        hasRequestedLocationPermission: true,
       };
     case AppActionType.SetLocationDisabled:
       return {
         ...state,
         hasLocationPermission: false,
-        hasRequestedLocationPermission: true
+        hasRequestedLocationPermission: true,
       };
   }
 }
 
 export function usePopulateAppState(dispatch) {
   React.useEffect(() => {
-    locationService.hasPermissionCached().then(perm => {
+    locationService.hasPermissionCached().then((perm) => {
       if (perm) {
         dispatch({ type: AppActionType.SetLocationEnabled });
       }

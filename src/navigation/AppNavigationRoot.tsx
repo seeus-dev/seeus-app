@@ -17,7 +17,7 @@ import LocationPermissionScreen from '../screens/login/LocationPermissionScreen'
 import {
   useAppDispatch,
   useAppState,
-  usePopulateAppState
+  usePopulateAppState,
 } from '../contexts/AppContext';
 import { useAuthState } from '../contexts/AuthContext';
 
@@ -74,7 +74,9 @@ const Drawer = createDrawerNavigator();
 
 function LoggedInDrawerNav() {
   return (
-    <Drawer.Navigator drawerContent={props => <AppDrawerContent {...props} />}>
+    <Drawer.Navigator
+      drawerContent={(props) => <AppDrawerContent {...props} />}
+    >
       <Drawer.Screen
         name="Main"
         component={NewRequestScreen}
