@@ -22,6 +22,9 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: ESLint
+        run: yarn lint
+
+      - name: ESLint annotate
         run: yarn add @neovici/github-actions-eslint-annotator && yarn run github-actions-eslint-annotator
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
