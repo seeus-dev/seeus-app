@@ -24,8 +24,8 @@ jobs:
       - name: ESLint
         run: npm run lint
 
-      - name: ESLint annotate
-        run: npx github-actions-eslint-annotator
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PARTIAL_LINTING: false
+#      - name: ESLint annotate
+#        run: npx github-actions-eslint-annotator
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#          PARTIAL_LINTING: false
