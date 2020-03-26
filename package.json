@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
+    "@neovici/github-actions-eslint-annotator": "^0.4.0",
     "@types/react": "~16.9.0",
     "@types/react-native": "~0.60.23",
     "@typescript-eslint/eslint-plugin": "^2.24.0",
