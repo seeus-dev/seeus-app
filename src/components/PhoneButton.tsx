@@ -10,7 +10,6 @@ import {
 import { theme } from '../styles/colors';
 
 type ButtonProps = {
-
   onPress: (event) => void;
   style?: ViewStyle;
   labelStyle?: TextStyle;
@@ -29,10 +28,10 @@ export default function Button(props: ButtonProps) {
       style={buttonStyle}
       onPress={props.onPress}
     >
-    <Image
-    style={styles.image}
-    source={require('../../assets/phone-icon.png')}
-  />
+      <Image
+        style={styles.image}
+        source={require('../../assets/phone-icon.png')}
+      />
       <Text style={labelStyle}>734.487.3387</Text>
       {props.children}
     </TouchableOpacity>
@@ -64,11 +63,12 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 32,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   image: {
     flex: 0,
     width: 40,
     height: 50,
-    resizeMode: 'contain' }
+    resizeMode: 'contain',
+  },
 });
