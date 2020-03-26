@@ -19,13 +19,13 @@ jobs:
           node-version: 10.x
 
       - name: Install
-        run: yarn install --frozen-lockfile
+        run: npm ci
 
       - name: ESLint
-        run: yarn lint
+        run: npm run lint
 
       - name: ESLint annotate
-        run: yarn add @neovici/github-actions-eslint-annotator && yarn run github-actions-eslint-annotator
+        run: npx github-actions-eslint-annotator
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PARTIAL_LINTING: true # on PRs
