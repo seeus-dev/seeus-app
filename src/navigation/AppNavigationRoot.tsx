@@ -5,7 +5,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import EntryScreen from '../screens/EntryScreen';
 import LoginScreen from '../screens/login/LoginScreen';
-import NewRequestScreen from '../screens/NewRequestScreen';
+import MapScreen from '../screens/MapScreen';
 import RequestsScreen from '../screens/RequestsScreen';
 import HoursScreen from '../screens/HoursScreen';
 import HelpScreen from '../screens/HelpScreen';
@@ -78,8 +78,8 @@ function LoggedInDrawerNav() {
       drawerContent={(props) => <AppDrawerContent {...props} />}
     >
       <Drawer.Screen
-        name="Main"
-        component={NewRequestScreen}
+        name="MainMap"
+        component={MapScreen}
         options={{ title: 'Request SEEUS' }}
       />
       <Drawer.Screen name="My Requests" component={RequestsScreen} />
