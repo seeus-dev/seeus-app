@@ -28,4 +28,4 @@ jobs:
         run: npx github-actions-eslint-annotator
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PARTIAL_LINTING: true # on PRs
+          PARTIAL_LINTING: false
