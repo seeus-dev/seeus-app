@@ -1,6 +1,8 @@
 import React, { useRef, useState } from 'react';
 import {
   Alert,
+  Keyboard,
+  StatusBar,
   StyleSheet,
   Text,
   TextInput,
@@ -42,35 +44,43 @@ export default function EnterEidScreen() {
   };
 
   return (
-    <View style={styles.container}>
-      <View>
-        <Text style={styles.titleText}>Enter your EID</Text>
-        <Text style={styles.subTitleText}>
-          SEEUS uses your EID (Eastern ID) number for verification.
-        </Text>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.container}>
+        <StatusBar barStyle="light-content" />
+        <View>
+          <Text style={styles.titleText}>Enter your EID</Text>
+          <Text style={styles.subTitleText}>
+            We use your EID (Eastern ID) number for verification.
+          </Text>
+        </View>
+        <Text style={styles.emailText}>{user.username}@emich.edu</Text>
+        <View style={{ flexDirection: 'row' }}>
+          <EidInput eid={eid} onChange={setEid} />
+        </View>
+        <View style={{ flexDirection: 'row' }}>
+          <Button
+            label="Logout"
+            onPress={logout}
+            style={styles.negativeButton}
+            labelStyle={styles.negativeButtonLabel}
+          />
+          <View style={{ flex: 1 }} />
+          <Button
+            label="Save"
+            onPress={submit}
+            showShadow={true}
+            style={styles.positiveButton}
+            labelStyle={styles.positiveButtonLabel}
+          >
+            <AntDesign
+              name="checkcircle"
+              size={22}
+              style={{ marginRight: 10 }}
+            />
+          </Button>
+        </View>
       </View>
-      <Text style={styles.emailText}>{user.username}@emich.edu</Text>
-      <View style={{ flexDirection: 'row' }}>
-        <EidInput eid={eid} onChange={setEid} />
-      </View>
-      <View style={{ flexDirection: 'row' }}>
-        <Button
-          label="Logout"
-          onPress={logout}
-          style={styles.negativeButton}
-          labelStyle={styles.negativeButtonLabel}
-        />
-        <Button
-          label="Save"
-          onPress={submit}
-          showShadow={true}
-          style={styles.positiveButton}
-          labelStyle={styles.positiveButtonLabel}
-        >
-          <AntDesign name="checkcircle" size={22} style={{ marginRight: 10 }} />
-        </Button>
-      </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 }
 
@@ -87,7 +97,7 @@ function EidInput(props: { eid: string; onChange: (string) => void }) {
           ref={eidInputRef}
           style={styles.input}
           accessibilityHint="EID"
-          autoFocus={true}
+          autoFocus={false}
           autoCorrect={false}
           autoCapitalize="none"
           keyboardType="numeric"
@@ -128,5 +138,6 @@ const styles = StyleSheet.create({
     ...onboardingStyle.positiveButton,
     justifyContent: 'center',
     flexDirection: 'row-reverse',
+    paddingHorizontal: 30,
   },
 });
