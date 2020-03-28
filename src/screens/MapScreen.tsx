@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     top: 0,
     opacity: 0.0,
     height: Dimensions.get('window').height,
-    width: 15,
+    width: 40,
     zIndex: 2,
   },
 });

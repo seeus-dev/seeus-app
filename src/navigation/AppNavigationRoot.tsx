@@ -20,6 +20,7 @@ import {
   usePopulateAppState,
 } from '../contexts/AppContext';
 import { useAuthState } from '../contexts/AuthContext';
+import { Dimensions } from 'react-native';
 
 const RootStack = createStackNavigator();
 
@@ -73,9 +74,14 @@ function getLoggedInScreens(authState, appState) {
 const Drawer = createDrawerNavigator();
 
 function LoggedInDrawerNav() {
+  const screenWidth = Dimensions.get('window').width;
+  const drawerWidth = screenWidth * (screenWidth < 400 ? 0.7 : 0.65);
   return (
     <Drawer.Navigator
       drawerContent={(props) => <AppDrawerContent {...props} />}
+      drawerStyle={{ width: drawerWidth }}
+      edgeWidth={50}
+      minSwipeDistance={5}
     >
       <Drawer.Screen
         name="MainMap"
