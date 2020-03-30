@@ -3,12 +3,9 @@ import {
   Image,
   StyleSheet,
   Text,
-  TextStyle,
   TouchableOpacity,
-  ViewStyle,
   Linking,
   Platform,
-  View,
 } from 'react-native';
 import { theme } from '../styles/colors';
 
@@ -41,7 +38,7 @@ export default function PhoneButton(props: ButtonProps) {
         source={require('../../assets/phone-icon.png')}
       />
       <Text style={labelStyle}>734.487.3387</Text>
-      {props.ButtonProps}
+      {props.children}
     </TouchableOpacity>
   );
 }
