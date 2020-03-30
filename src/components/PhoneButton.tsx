@@ -6,34 +6,42 @@ import {
   TextStyle,
   TouchableOpacity,
   ViewStyle,
+  Linking,
+  Platform,
+  View,
 } from 'react-native';
 import { theme } from '../styles/colors';
 
-type ButtonProps = {
-  onPress: (event) => void;
-  style?: ViewStyle;
-  labelStyle?: TextStyle;
-  activeOpacity?: number;
-  showShadow?: boolean;
-  children?: ReactChild;
-};
+function dialCall() {
+  let phoneNumber = '';
 
-export default function Button(props: ButtonProps) {
+  if (Platform.OS === 'android') {
+    phoneNumber = 'tel:${7344873387}';
+  } else {
+    phoneNumber = 'telprompt:${7344873387}';
+  }
+  Linking.openURL(phoneNumber);
+}
+
+export default function PhoneButton(props: ButtonProps) {
   const shadowStyle = props.showShadow ? styles.buttonShadow : {};
   const buttonStyle = { ...styles.button, ...props.style, ...shadowStyle };
   const labelStyle = { ...styles.label, ...props.labelStyle };
   return (
+
     <TouchableOpacity
       activeOpacity={props.activeOpacity || 0.5}
       style={buttonStyle}
-      onPress={props.onPress}
+      onPress={() => dialCall()}
+
     >
+
       <Image
         style={styles.image}
         source={require('../../assets/phone-icon.png')}
       />
       <Text style={labelStyle}>734.487.3387</Text>
-      {props.children}
+      {props.ButtonProps}
     </TouchableOpacity>
   );
 }
