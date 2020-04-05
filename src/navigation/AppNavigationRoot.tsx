@@ -5,7 +5,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import EntryScreen from '../screens/EntryScreen';
 import LoginScreen from '../screens/login/LoginScreen';
-import MapScreen from '../screens/MapScreen';
+import MapScreen from '../screens/map/MapScreen';
 import RequestsScreen from '../screens/RequestsScreen';
 import HoursScreen from '../screens/HoursScreen';
 import HelpScreen from '../screens/HelpScreen';

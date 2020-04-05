@@ -1,6 +1,6 @@
 import React from 'react';
 import { Dimensions, StyleSheet, Text, View } from 'react-native';
-import baseStyle from '../styles/base';
+import baseStyle from '../../styles/base';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 
 /*
