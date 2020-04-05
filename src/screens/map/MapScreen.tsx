@@ -3,26 +3,20 @@ import { Dimensions, StyleSheet, Text, View } from 'react-native';
 import baseStyle from '../../styles/base';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 
-/*
-Object {
-  "latitude": 42.25117744909886,
-  "latitudeDelta": 0.012188015995853618,
-  "longitude": -83.62443594262004,
-  "longitudeDelta": 0.00833127647638321,
-}
- */
+const EMU_CAMPUS_MAP_START_REGION = {
+  latitude: 42.25117744909886,
+  longitude: -83.62443594262004,
+  latitudeDelta: 0.012188015995853618,
+  longitudeDelta: 0.00833127647638321,
+};
+
 export default function MapScreen() {
   return (
     <View style={styles.container}>
       <MapView
         provider={PROVIDER_GOOGLE}
         style={styles.mapView}
-        region={{
-          latitude: 42.25117744909886,
-          longitude: -83.62443594262004,
-          latitudeDelta: 0.012188015995853618,
-          longitudeDelta: 0.00833127647638321,
-        }}
+        region={EMU_CAMPUS_MAP_START_REGION}
         showsUserLocation
         // onUserLocationChange={(e) => console.log('location', e)}
         onRegionChange={(region) => console.log(region)}
