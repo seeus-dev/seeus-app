@@ -25,6 +25,7 @@ export default function MapScreen() {
         showsIndoors={false}
         showsIndoorLevelPicker={false}
         showsTraffic={false}
+        showsMyLocationButton={false}
         mapType="standard"
         customMapStyle={[
           {
