@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {
   ActivityIndicator,
   Dimensions,
+  StatusBar,
   StyleSheet,
   TouchableOpacity,
   View,
@@ -48,6 +49,7 @@ export default function OauthWebViewScreen(props: ScreenProps) {
 
   return (
     <View style={styles.container}>
+      <StatusBar barStyle="dark-content" />
       {loading && (
         <View style={styles.loadingContainer}>
           <ActivityIndicator size="large" color="#000" style={styles.loading} />

@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
     ...baseStyle.container,
     backgroundColor: '#fff',
     alignItems: 'center',
+    paddingTop: 0,
   },
   mapView: {
     flex: 1,
