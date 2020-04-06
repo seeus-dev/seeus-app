@@ -19,8 +19,10 @@ module.exports = {
         node: true,
     },
     rules: {
-        'prettier/prettier': 'warn',
+        'prettier/prettier': 'error',
         'object-curly-spacing': [2, 'always'],
+        'no-undef': 'error',
+
         '@typescript-eslint/no-use-before-define': 'off',
         '@typescript-eslint/explicit-function-return-type': 'off',
 
