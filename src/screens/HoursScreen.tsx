@@ -5,7 +5,7 @@ import baseStyle from '../styles/base';
 export default function HoursScreen() {
   return (
     <View style={styles.container}>
-      <Text>Hours Screen</Text>
+      <Text>Hours Screen testing for changes</Text>
     </View>
   );
 }
