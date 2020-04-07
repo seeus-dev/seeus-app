@@ -23,7 +23,6 @@ function dialCall() {
 
 export default function PhoneButton(props: ButtonProps) {
   return (
-
     <Button style={styles.button} onPress={() => dialCall()}>
       <Image
         style={styles.image}
@@ -31,9 +30,7 @@ export default function PhoneButton(props: ButtonProps) {
       />
       <Text style={styles.label}>734.487.3387</Text>
       {props.children}
-      </Button>
-
-
+    </Button>
   );
 }
 
