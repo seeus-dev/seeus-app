@@ -8,38 +8,32 @@ import {
   Platform,
 } from 'react-native';
 import { theme } from '../styles/colors';
+import Button from '../components/Button';
 
 function dialCall() {
   let phoneNumber = '';
 
   if (Platform.OS === 'android') {
-    phoneNumber = 'tel:${7344873387}';
+    phoneNumber = 'tel:7344873387';
   } else {
-    phoneNumber = 'telprompt:${7344873387}';
+    phoneNumber = 'telprompt:7344873387';
   }
   Linking.openURL(phoneNumber);
 }
 
 export default function PhoneButton(props: ButtonProps) {
-  const shadowStyle = props.showShadow ? styles.buttonShadow : {};
-  const buttonStyle = { ...styles.button, ...props.style, ...shadowStyle };
-  const labelStyle = { ...styles.label, ...props.labelStyle };
   return (
 
-    <TouchableOpacity
-      activeOpacity={props.activeOpacity || 0.5}
-      style={buttonStyle}
-      onPress={() => dialCall()}
-
-    >
-
+    <Button style={styles.button} onPress={() => dialCall()}>
       <Image
         style={styles.image}
         source={require('../../assets/phone-icon.png')}
       />
-      <Text style={labelStyle}>734.487.3387</Text>
+      <Text style={styles.label}>734.487.3387</Text>
       {props.children}
-    </TouchableOpacity>
+      </Button>
+
+
   );
 }
 
