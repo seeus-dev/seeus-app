@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, StyleSheet, Text, View } from 'react-native';
+import { Alert, StatusBar, StyleSheet, Text, View } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import Button from '../../components/Button';
 import onboardingStyle from './onboarding-screen-style';
@@ -33,6 +33,7 @@ export default function LocationPermissionScreen() {
 
   return (
     <View style={styles.container}>
+      <StatusBar barStyle="light-content" />
       <View>
         <Text style={styles.titleText}>Location</Text>
         <Text style={styles.subTitleText}>

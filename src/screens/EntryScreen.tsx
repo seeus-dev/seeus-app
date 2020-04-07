@@ -1,5 +1,13 @@
 import React from 'react';
-import { Image, StyleSheet, TouchableOpacity, View, Text } from 'react-native';
+import {
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  Text,
+  StatusBar,
+  Dimensions,
+} from 'react-native';
 import baseStyle from '../styles/base';
 import colors, { theme } from '../styles/colors';
 import Button from '../components/Button';
@@ -10,6 +18,7 @@ export default function EntryScreen(props: {
 }) {
   return (
     <View style={styles.container}>
+      <StatusBar barStyle="light-content" />
       <View style={styles.content}>
         <View style={styles.logoContainer}>
           <Image
@@ -42,11 +51,16 @@ const styles = StyleSheet.create({
   },
   logoContainer: {
     flexDirection: 'row',
-    width: '80%',
+    justifyContent: 'center',
   },
-  logo: {
-    marginBottom: 10,
-  },
+  logo: (function () {
+    const dimen = Dimensions.get('window').width < 400 ? 220 : 270;
+    return {
+      marginBottom: 10,
+      width: dimen,
+      height: dimen,
+    };
+  })(),
   loginButton: {
     backgroundColor: colors.seeusYellow,
   },
