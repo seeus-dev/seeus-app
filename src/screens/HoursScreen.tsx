@@ -7,15 +7,24 @@ import Constants from "expo-constants";
 const DATA = [
   {
     title: "Request A Walk",
-    data: ["", "", ""]
+    data:
+    ["Sun                                 5:00pm-3:00am",
+     "Mon                                 5:00pm-1:00am",
+     "Tue                                 5:00pm-1:00am",
+     "Wed                                 5:00pm-1:00am",
+     "Thu                                 5:00pm-1:00am",
+     "Fri                                 5:00pm-1:00am",
+     "Sat                                 5:00pm-1:00am",
+
+    ]
   },
   {
     title: "Request SeeUs Van",
-    data: ["", "", ""]
+    data: ["", "", "","",""]
   },
   {
     title: "Request A Jump/Unlock",
-    data: ["", "", ""]
+    data: ["", "", "","",""]
   }
 ];
 
@@ -61,8 +70,8 @@ const styles = StyleSheet.create({
   },
   item: {
     backgroundColor: colors.seeusYellow,
-    paddingVertical: 25,
-    paddingHorizontal: 100,
+    paddingVertical: 15,
+    paddingHorizontal: 25,
     marginVertical: 1,
     alignItems: 'flex-start',
   },
@@ -74,6 +83,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   title: {
-    fontSize: 15
+    fontSize: 12,
+    textAlign: 'center'
   }
 });
