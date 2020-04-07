@@ -1,5 +1,7 @@
 import React, { useRef, useState } from 'react';
 import {
+  Keyboard,
+  StatusBar,
   StyleSheet,
   Text,
   TextInput,
@@ -25,34 +27,38 @@ export default function LoginScreen(props: ScreenProps) {
   };
 
   return (
-    <View style={styles.container}>
-      <View>
-        <Text style={styles.titleText}>Welcome</Text>
-        <Text style={styles.subTitleText}>
-          Let&apos;s start by entering your NetID
-        </Text>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.container}>
+        <StatusBar barStyle="light-content" />
+        <View>
+          <Text style={styles.titleText}>Welcome</Text>
+          <Text style={styles.subTitleText}>
+            Let&apos;s start by entering your NetID
+          </Text>
+        </View>
+        <View style={{ flexDirection: 'row' }}>
+          <UsernameInput username={username} onChange={setUsername} />
+        </View>
+        <View style={{ flexDirection: 'row' }}>
+          <Button
+            label="Cancel"
+            onPress={() => props.navigation.goBack()}
+            style={styles.negativeButton}
+            labelStyle={styles.negativeButtonLabel}
+          />
+          <View style={{ flex: 1 }} />
+          <Button
+            label="Continue"
+            onPress={submit}
+            showShadow={true}
+            style={styles.positiveButton}
+            labelStyle={styles.positiveButtonLabel}
+          >
+            <FontAwesome name="arrow-right" size={18} />
+          </Button>
+        </View>
       </View>
-      <View style={{ flexDirection: 'row' }}>
-        <UsernameInput username={username} onChange={setUsername} />
-      </View>
-      <View style={{ flexDirection: 'row' }}>
-        <Button
-          label="Cancel"
-          onPress={() => props.navigation.goBack()}
-          style={styles.negativeButton}
-          labelStyle={styles.negativeButtonLabel}
-        />
-        <Button
-          label="Continue"
-          onPress={submit}
-          showShadow={true}
-          style={styles.positiveButton}
-          labelStyle={styles.positiveButtonLabel}
-        >
-          <FontAwesome name="arrow-right" size={18} />
-        </Button>
-      </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 }
 
@@ -70,6 +76,7 @@ function UsernameInput(props: {
           onChangeText={(text) => onChange(cleanUsername(text))}
           ref={usernameInputRef}
           style={styles.input}
+          selectionColor="#fff"
           accessibilityHint="NetID Username"
           autoFocus={true}
           autoCorrect={false}
@@ -86,5 +93,13 @@ const styles = StyleSheet.create({
   inputContainer: {
     ...onboardingStyle.inputContainer,
     flexDirection: 'row',
+  },
+  positiveButton: {
+    ...onboardingStyle.positiveButton,
+    flex: 0,
+  },
+  positiveButtonLabel: {
+    ...onboardingStyle.positiveButtonLabel,
+    marginRight: 15,
   },
 });
