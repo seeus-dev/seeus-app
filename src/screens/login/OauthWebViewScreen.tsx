@@ -13,6 +13,7 @@ import { AuthActionType, useAuthDispatch } from '../../contexts/AuthContext';
 import { AntDesign } from '@expo/vector-icons';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { clearCookies } from '../../util';
+import { OAUTH_URL } from '../../services/api';
 
 type ScreenProps = {
   route: any;
@@ -23,7 +24,6 @@ const WEB_VIEW_USER_AGENT =
   'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) ' +
   'AppleWebKit/603.1.30 (KHTML, like Gecko) Version/10.0 Mobile/14E304 ' +
   'Safari/602.1';
-const OAUTH_URL = 'http://localhost:5000/app/oauth/start?username=';
 
 export default function OauthWebViewScreen(props: ScreenProps) {
   const { route, navigation } = props;
