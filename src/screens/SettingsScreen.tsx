@@ -11,34 +11,36 @@ export default function SettingsScreen() {
       <Text style={styles.user}> User Name & EID</Text>
       <Button
         label="Change Name  "
-        style={styles.reportButton}
+        style={styles.button}
         labelStyle={styles.textlist}
         showShadow={true}
       >
-        <AntDesign name="rightcircleo" size={25} />
+        <AntDesign name="rightcircleo" size={30} />
       </Button>
       <Button
         label="Change Picture  "
-        style={styles.reportButton}
+        style={styles.button}
         labelStyle={styles.textlist}
         showShadow={true}
       >
-        <AntDesign name="rightcircleo" size={25} />
+        <AntDesign name="rightcircleo" size={30} />
       </Button>
 
       <Button
         label="Location Services "
-        style={styles.reportButton}
-        labelStyle={styles.textlist}
-        showShadow={true}
-      ></Button>
-      <Button
-        label="Logout "
-        style={styles.reportButton}
+        style={styles.button}
         labelStyle={styles.textlist}
         showShadow={true}
       >
-        <AntDesign name="rightcircleo" size={25} />
+        <AntDesign name="checkcircleo" size={30} />
+      </Button>
+      <Button
+        label="Logout "
+        style={styles.button}
+        labelStyle={styles.textlist}
+        showShadow={true}
+      >
+        <AntDesign name="rightcircleo" size={30} />
       </Button>
     </View>
   );
@@ -53,16 +55,23 @@ const styles = StyleSheet.create({
     fontSize: 50,
     fontWeight: 'bold',
     textAlign: 'center',
+    backgroundColor: '#0d6d46',
+    color: 'white',
   },
   user: {
     paddingTop: 20,
     fontSize: 35,
     textAlign: 'center',
+    backgroundColor: '#0d6d46',
+    color: 'white',
   },
   textlist: {
     textAlign: 'left',
     fontWeight: 'bold',
     fontSize: 40,
     justifyContent: 'center',
+  },
+  button: {
+    paddingBottom: 15,
   },
 });
