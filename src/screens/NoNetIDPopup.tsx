@@ -10,19 +10,27 @@ export default function NoNetIDPopup(props: {
     navigation: StackNavigationProp<any>;
     }) {
   return (
-    <View style={styles.container}>
-      <View style={styles.toolbar}>
-        <Button
-            label= "X"
-            style={styles.backButton}
-            labelStyle={styles.backButtonText}
-            showShadow={true}
-            onPress={() => props.navigation.goBack()}
-        />
-        <Text style={styles.titleText}> No NetID </Text>
+    <View style={styles.mainContainer}>
+      <View style={styles.toolbarContainer}>
+        <View style={styles.toolbar}>
+            <Button
+                label= "X"
+                style={styles.backButton}
+                labelStyle={styles.backButtonText}
+                showShadow={true}
+                onPress={() => props.navigation.goBack()}
+            />
+        </View>
+        <View style={styles.toolbarTextContainer}>
+            <Text style={styles.titleText}> No NetID? </Text>
+        </View>
       </View>
-      <View style={styles.container}>
+
+      <View style={styles.mainContainer}>
         <Text style={styles.titleText}> If you do not have an @emich.edu email account, please call SEEUS for service. </Text>
+      </View>
+      <View style={styles.mainContainer}>
+        <Text style={styles.titleText}> Seeus Number: </Text>
         <Button
             label= "734-487-3387"
             style={styles.phoneButton}
@@ -31,7 +39,10 @@ export default function NoNetIDPopup(props: {
             onPress={() => makeCall()}
         />
       </View>
+      <View style={styles.mainContainer}>
+     </View>
     </View>
+    
   );
 }
 
@@ -52,24 +63,40 @@ function makeCall()
 
 
 const styles = StyleSheet.create({
-  container: {
+  mainContainer: {
     ...baseStyle.container,
     backgroundColor: colors.white,
-    paddingBottom: 200,
+    flex: 1,
+    height: '100%',
+  },
+  toolbarContainer: {
+     backgroundColor: colors.seeusYellow,
+     flexDirection: 'row',
+     alignContent: 'center',
+     height: 60,
+     borderWidth: 1,
   },
   toolbar: {
-      ...baseStyle.container,
       backgroundColor: colors.seeusYellow,
-      borderWidth: 2,
-      width: Dimensions.get('window').width,
-      marginBottom: 120,
       flexDirection: 'row',
       alignItems: 'flex-end',
-      justifyContent: 'flex-start',
-      paddingLeft: 10,
+      flex: 1,
+      height: '100%',
+      width: '100%',
+  },
+  toolbarTextContainer: {
+      backgroundColor: colors.seeusYellow,
+      flexDirection: 'row',
+      alignItems: 'flex-end',
+      justifyContent: 'center',
+      flex: 6,
+      height: '100%',
+      width: '100%',
+
   },
   phoneButton: {
       backgroundColor: colors.seeusYellow,
+      alignItems: 'flex-end',
   },
   titleText: {
         fontSize: 30,
@@ -81,19 +108,13 @@ const styles = StyleSheet.create({
       fontSize: 30,
       fontWeight: 'bold',
   },
-  content: {
-      flex: 1,
-      justifyContent: 'center',
-  },
   backButton: {
-      backgroundColor: colors.white,
-      marginRight: 45,
-      marginBottom: 6,
+      backgroundColor: colors.black,
   },
   backButtonText: {
       fontSize: 14,
       fontWeight: 'bold',
-      color: colors.black,
+      color: colors.white,
       textAlign: 'left',
   },
 });
