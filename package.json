@@ -48,6 +48,8 @@
     }
   },
   "lint-staged": {
-    "*.{js,ts,jsx,tsx,css,scss}": ["./node_modules/.bin/eslint --fix"]
+    "*.{js,ts,jsx,tsx,css,scss}": [
+      "./node_modules/.bin/eslint --fix"
+    ]
   }
 }
