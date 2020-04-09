@@ -3,12 +3,24 @@ import { View, Text, StyleSheet } from 'react-native';
 import baseStyle from '../styles/base';
 import { AntDesign } from '@expo/vector-icons';
 import Button from '../components/Button';
+import {
+  AuthActionType,
+  useAuthDispatch,
+  useAuthState,
+} from '../contexts/AuthContext';
 
 export default function SettingsScreen() {
+  const authState = useAuthState();
   return (
     <View>
       <Text style={styles.header}> Settings</Text>
-      <Text style={styles.user}> User Name & EID</Text>
+      <Text style={styles.user}>
+        {' '}
+        {'Username: ' +
+          authState.user.username +
+          '\n EID: ' +
+          authState.user.eid}{' '}
+      </Text>
       <Button
         label="Change Name  "
         style={styles.button}
@@ -51,7 +63,8 @@ const styles = StyleSheet.create({
     ...baseStyle.container,
   },
   header: {
-    paddingTop: 50,
+    paddingTop: 60,
+    paddingBottom: 35,
     fontSize: 50,
     fontWeight: 'bold',
     textAlign: 'center',
@@ -62,8 +75,7 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     fontSize: 35,
     textAlign: 'center',
-    backgroundColor: '#0d6d46',
-    color: 'white',
+    color: 'black',
   },
   textlist: {
     textAlign: 'left',
