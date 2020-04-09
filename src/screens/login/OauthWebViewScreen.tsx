@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   ActivityIndicator,
   Dimensions,
@@ -12,6 +12,7 @@ import WebView from 'react-native-webview';
 import { AuthActionType, useAuthDispatch } from '../../contexts/AuthContext';
 import { AntDesign } from '@expo/vector-icons';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { clearCookies } from '../../util';
 
 type ScreenProps = {
   route: any;
@@ -22,40 +23,38 @@ const WEB_VIEW_USER_AGENT =
   'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) ' +
   'AppleWebKit/603.1.30 (KHTML, like Gecko) Version/10.0 Mobile/14E304 ' +
   'Safari/602.1';
+const OAUTH_URL = 'http://localhost:5000/app/oauth/start?username=';
 
 export default function OauthWebViewScreen(props: ScreenProps) {
   const { route, navigation } = props;
   const { username } = route.params;
   const authDispatch = useAuthDispatch();
   const [loading, setLoading] = useState(true);
+  const [finalLoading, setFinalLoading] = useState(false);
+  const showLoadingScreen = loading || finalLoading;
+  const webviewUrl = OAUTH_URL + username;
 
-  const onWebViewMessage = (event) => {
-    const msg = event.nativeEvent.data;
-    console.log('Logging in. Web View Message = ', msg);
-    authDispatch({ type: AuthActionType.Login, user: { username } });
-  };
+  // Clear the web view cookies on first render
+  useEffect(clearCookies, []);
 
-  const webViewInjectedJs = `
-        document.getElementById('username').value = '${username}';
-        document.getElementById('password').value = '';
-        
-        // temporary until we have our 'oauth complete' page in the webview to call postMessage
-        document.getElementById('fm1').onsubmit = function(event) {
-            event.preventDefault();
-            if(window.ReactNativeWebView) {
-                window.ReactNativeWebView.postMessage('submit');
-            }
-            return false;
-        };
-    `;
-
-  // TODO: use oauth url here (url from backend which will redirect to google/emich login page)
-  const oauthUrl = 'https://my.emich.edu';
+  function onWebViewMessage(event) {
+    let msg = event.nativeEvent.data;
+    if (msg == 'finalLoading' && !finalLoading) {
+      setFinalLoading(true);
+    }
+    try {
+      msg = JSON.parse(msg);
+    } catch (e) {}
+    console.log('Received Web View Message: ', msg);
+    if (msg.user) {
+      authDispatch({ type: AuthActionType.Login, user: msg.user });
+    }
+  }
 
   return (
     <View style={styles.container}>
       <StatusBar barStyle="dark-content" />
-      {loading && (
+      {showLoadingScreen && (
         <View style={styles.loadingContainer}>
           <ActivityIndicator size="large" color="#000" style={styles.loading} />
         </View>
@@ -68,10 +67,10 @@ export default function OauthWebViewScreen(props: ScreenProps) {
       </TouchableOpacity>
       <View style={styles.webViewContainer}>
         <WebView
-          source={{ uri: oauthUrl }}
+          source={{ uri: webviewUrl }}
           originWhitelist={['*']}
           allowsLinkPreview={false}
-          injectedJavaScript={webViewInjectedJs}
+          injectedJavaScript={webViewInjectedJs(username, webviewUrl)}
           style={styles.webView}
           onShouldStartLoadWithRequest={() => true}
           onLoadStart={() => setLoading(true)}
@@ -83,6 +82,34 @@ export default function OauthWebViewScreen(props: ScreenProps) {
       </View>
     </View>
   );
+}
+
+// This code is ran inside the webview itself
+function webViewInjectedJs(username, webviewUrl) {
+  return `
+    // Auto fill username on EMU login screen
+    const usernameField = document.getElementById('username');
+    const passwordField = document.getElementById('password')
+    if(usernameField) usernameField.value = '${username}';
+    if(passwordField) passwordField.value = '';
+    
+    // Duo verification overflows and doesn't scroll; force enable scrolling
+    const content = document.getElementById('content');
+    if(content) content.style.overflow = 'scroll';
+    
+    // EMU CAS breaks the oauth flow. To get around this, check whether we 
+    // have gotten to "Log In Successful" screen, then start oauth again
+    const msgBox = document.getElementById('msg');
+    if(msgBox) {
+      const isSuccessMsgBoxPresent = Array.from(msgBox.children)
+        .filter(ele => ele.textContent.includes('Log In Successful'))
+        .length > 0;
+      if(isSuccessMsgBoxPresent) {
+        window.ReactNativeWebView.postMessage('finalLoading');
+        window.location = '${webviewUrl}';
+      }
+    }
+  `;
 }
 
 const styles = StyleSheet.create({
