@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   ActivityIndicator,
   Dimensions,
+  Keyboard,
   SafeAreaView,
   StatusBar,
   StyleSheet,
@@ -32,6 +33,8 @@ export default function OauthWebViewScreen(props: ScreenProps) {
   const authDispatch = useAuthDispatch();
   const [loading, setLoading] = useState(true);
   const webviewUrl = OAUTH_URL + username;
+
+  useKeyboardListenerDarkStatusBarEffect();
 
   function onWebViewMessage(event) {
     let msg = event.nativeEvent.data;
@@ -126,6 +129,25 @@ function webViewInjectedJs(username, webviewUrl) {
       }
     }
   `;
+}
+
+/**
+ * Fixes a bug with react-native-webview that causes status bar to turn white when keyboard opens on iOS
+ * https://github.com/react-native-community/react-native-webview/issues/735
+ */
+function useKeyboardListenerDarkStatusBarEffect() {
+  setStatusBarDarkStyle();
+  useEffect(() => {
+    Keyboard.addListener('keyboardWillShow', setStatusBarDarkStyle);
+
+    return function cleanup() {
+      Keyboard.removeListener('keyboardWillShow', setStatusBarDarkStyle);
+    };
+  }, []);
+}
+
+function setStatusBarDarkStyle() {
+  StatusBar.setBarStyle('dark-content');
 }
 
 const styles = StyleSheet.create({
