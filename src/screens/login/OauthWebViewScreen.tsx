@@ -139,8 +139,8 @@ function webViewInjectedJs(username, webviewUrl) {
  * https://github.com/react-native-community/react-native-webview/issues/735
  */
 function useKeyboardListenerDarkStatusBarEffect() {
-  setStatusBarDarkStyle();
   useEffect(() => {
+    setStatusBarDarkStyle();
     Keyboard.addListener('keyboardWillShow', setStatusBarDarkStyle);
 
     return function cleanup() {
