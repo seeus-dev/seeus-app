@@ -12,7 +12,6 @@ import WebView from 'react-native-webview';
 import { AuthActionType, useAuthDispatch } from '../../contexts/AuthContext';
 import { AntDesign } from '@expo/vector-icons';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { clearCookies } from '../../util';
 import { OAUTH_URL } from '../../services/api';
 
 type ScreenProps = {
@@ -33,9 +32,6 @@ export default function OauthWebViewScreen(props: ScreenProps) {
   const [finalLoading, setFinalLoading] = useState(false);
   const showLoadingScreen = loading || finalLoading;
   const webviewUrl = OAUTH_URL + username;
-
-  // Clear the web view cookies on first render
-  useEffect(clearCookies, []);
 
   function onWebViewMessage(event) {
     let msg = event.nativeEvent.data;
@@ -68,6 +64,7 @@ export default function OauthWebViewScreen(props: ScreenProps) {
       <View style={styles.webViewContainer}>
         <WebView
           source={{ uri: webviewUrl }}
+          incognito
           originWhitelist={['*']}
           allowsLinkPreview={false}
           injectedJavaScript={webViewInjectedJs(username, webviewUrl)}

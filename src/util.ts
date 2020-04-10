@@ -1,5 +1,5 @@
 import { MutableRefObject } from 'react';
-import { NativeModules, TextInput } from 'react-native';
+import { TextInput } from 'react-native';
 
 export function focusTextInput(ref: MutableRefObject<TextInput>) {
   const input = ref.current;
@@ -14,10 +14,4 @@ export function cleanUsername(username: string) {
 
 export function cleanEid(eid: string) {
   return eid.trim().replace(/[^0-9]+/g, '');
-}
-
-export function clearCookies() {
-  NativeModules.Networking.clearCookies((cleared) => {
-    console.debug('cleared hadCookies: ' + cleared.toString());
-  });
 }
