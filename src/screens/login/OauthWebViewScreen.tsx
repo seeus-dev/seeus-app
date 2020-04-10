@@ -31,8 +31,6 @@ export default function OauthWebViewScreen(props: ScreenProps) {
   const { username } = route.params;
   const authDispatch = useAuthDispatch();
   const [loading, setLoading] = useState(true);
-  const [finalLoading, setFinalLoading] = useState(false);
-  const showLoadingScreen = loading || finalLoading;
   const webviewUrl = OAUTH_URL + username;
 
   function onWebViewMessage(event) {
@@ -42,8 +40,8 @@ export default function OauthWebViewScreen(props: ScreenProps) {
       msg = JSON.parse(msg);
     } catch (e) {}
     console.log('Received Web View Message: ', msg);
-    if (msg.action == 'finalLoading' && !finalLoading) {
-      setFinalLoading(true);
+    if (msg.action == 'loading' && !loading) {
+      setLoading(true);
     } else if (msg.action == 'linkClick') {
       Linking.openURL(msg.url).catch((e) => console.error(e));
     } else if (msg.action == 'loginSuccess') {
@@ -54,7 +52,7 @@ export default function OauthWebViewScreen(props: ScreenProps) {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" />
-      {showLoadingScreen && (
+      {loading && (
         <View style={styles.loadingContainer}>
           <ActivityIndicator size="large" color="#000" style={styles.loading} />
         </View>
@@ -122,7 +120,7 @@ function webViewInjectedJs(username, webviewUrl) {
           .filter(ele => ele.textContent.includes('Log In Successful'))
           .length > 0;
         if(isSuccessMsgBoxPresent) {
-          window.ReactNativeWebView.postMessage(JSON.stringify({ action: 'finalLoading' }));
+          window.ReactNativeWebView.postMessage(JSON.stringify({ action: 'loading' }));
           window.location = '${webviewUrl}';
         }
       }
