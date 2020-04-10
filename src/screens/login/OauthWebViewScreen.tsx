@@ -72,6 +72,7 @@ export default function OauthWebViewScreen(props: ScreenProps) {
           incognito
           originWhitelist={['*']}
           allowsLinkPreview={false}
+          keyboardDisplayRequiresUserAction={false}
           injectedJavaScript={webViewInjectedJs(username, webviewUrl)}
           style={styles.webView}
           onShouldStartLoadWithRequest={() => true}
@@ -95,7 +96,9 @@ function webViewInjectedJs(username, webviewUrl) {
       const usernameField = document.getElementById('username');
       const passwordField = document.getElementById('password');
       if(usernameField) usernameField.value = '${username}';
-      if(passwordField) passwordField.value = '';
+      if(passwordField) {
+        passwordField.focus();
+      }
       
       // Force external links to open in the browser instead of in our webview
       Array.from(document.querySelectorAll('a')).forEach(link => {
