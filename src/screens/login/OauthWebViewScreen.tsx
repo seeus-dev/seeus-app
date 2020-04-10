@@ -152,5 +152,7 @@ const styles = StyleSheet.create({
   backButton: {
     alignSelf: 'flex-start',
     padding: 10,
+    paddingTop: 15,
+    paddingRight: 50,
   },
 });
