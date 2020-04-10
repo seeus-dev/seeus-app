@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   ActivityIndicator,
   Dimensions,
@@ -14,6 +14,7 @@ import { AuthActionType, useAuthDispatch } from '../../contexts/AuthContext';
 import { AntDesign } from '@expo/vector-icons';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { OAUTH_URL } from '../../services/api';
+import { Linking } from 'expo';
 
 type ScreenProps = {
   route: any;
@@ -36,14 +37,16 @@ export default function OauthWebViewScreen(props: ScreenProps) {
 
   function onWebViewMessage(event) {
     let msg = event.nativeEvent.data;
-    if (msg == 'finalLoading' && !finalLoading) {
-      setFinalLoading(true);
-    }
+    if (!msg) return;
     try {
       msg = JSON.parse(msg);
     } catch (e) {}
     console.log('Received Web View Message: ', msg);
-    if (msg.user) {
+    if (msg.action == 'finalLoading' && !finalLoading) {
+      setFinalLoading(true);
+    } else if (msg.action == 'linkClick') {
+      Linking.openURL(msg.url).catch((e) => console.error(e));
+    } else if (msg.action == 'loginSuccess') {
       authDispatch({ type: AuthActionType.Login, user: msg.user });
     }
   }
@@ -85,26 +88,43 @@ export default function OauthWebViewScreen(props: ScreenProps) {
 // This code is ran inside the webview itself
 function webViewInjectedJs(username, webviewUrl) {
   return `
-    // Auto fill username on EMU login screen
-    const usernameField = document.getElementById('username');
-    const passwordField = document.getElementById('password')
-    if(usernameField) usernameField.value = '${username}';
-    if(passwordField) passwordField.value = '';
-    
-    // Duo verification overflows and doesn't scroll; force enable scrolling
-    const content = document.getElementById('content');
-    if(content) content.style.overflow = 'scroll';
-    
-    // EMU CAS breaks the oauth flow. To get around this, check whether we 
-    // have gotten to "Log In Successful" screen, then start oauth again
-    const msgBox = document.getElementById('msg');
-    if(msgBox) {
-      const isSuccessMsgBoxPresent = Array.from(msgBox.children)
-        .filter(ele => ele.textContent.includes('Log In Successful'))
-        .length > 0;
-      if(isSuccessMsgBoxPresent) {
-        window.ReactNativeWebView.postMessage('finalLoading');
-        window.location = '${webviewUrl}';
+    if(document.body.id === 'cas') {
+      
+      // Auto fill username
+      const usernameField = document.getElementById('username');
+      const passwordField = document.getElementById('password');
+      if(usernameField) usernameField.value = '${username}';
+      if(passwordField) passwordField.value = '';
+      
+      // Force external links to open in the browser instead of in our webview
+      Array.from(document.querySelectorAll('a')).forEach(link => {
+        if (link.href.includes('netid.emich.edu')) {
+          // skip netid links (logout and 'continue to application')
+          return;
+        }
+        link.onclick = () => {
+            window.ReactNativeWebView.postMessage(
+              JSON.stringify({ action: 'linkClick', url: link.href })
+            );
+            return false;
+        };
+      });
+      
+      // Duo verification overflows horizontally but doesn't scroll; force enable scrolling
+      const content = document.getElementById('content');
+      if(content) content.style.overflow = 'scroll';
+      
+      // EMU CAS breaks the oauth flow. To get around this, check whether we 
+      // have gotten to "Log In Successful" screen, then start oauth again
+      const msgBox = document.getElementById('msg');
+      if(msgBox) {
+        const isSuccessMsgBoxPresent = Array.from(msgBox.children)
+          .filter(ele => ele.textContent.includes('Log In Successful'))
+          .length > 0;
+        if(isSuccessMsgBoxPresent) {
+          window.ReactNativeWebView.postMessage(JSON.stringify({ action: 'finalLoading' }));
+          window.location = '${webviewUrl}';
+        }
       }
     }
   `;
