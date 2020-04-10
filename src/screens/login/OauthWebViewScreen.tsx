@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {
   ActivityIndicator,
   Dimensions,
+  SafeAreaView,
   StatusBar,
   StyleSheet,
   TouchableOpacity,
@@ -48,7 +49,7 @@ export default function OauthWebViewScreen(props: ScreenProps) {
   }
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" />
       {showLoadingScreen && (
         <View style={styles.loadingContainer}>
@@ -77,7 +78,7 @@ export default function OauthWebViewScreen(props: ScreenProps) {
           userAgent={WEB_VIEW_USER_AGENT}
         />
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
