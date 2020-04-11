@@ -16,10 +16,14 @@ Created for EMU CS Senior Capstone Project, Winter 2020.
    * [Yarn package manager](https://classic.yarnpkg.com/en/docs/install/)
 2. Clone repo `git clone git@github.com:seeus-dev/seeus-app.git`
 3. `cd seeus-app`
-4. `yarn install`
-5. `yarn start` 
+4. `cp .env.example .env`
+5. `yarn install`
+6. `yarn start` 
    -  Will automatically install [expo-cli](https://docs.expo.io/versions/latest/workflow/expo-cli/) 
    -  Starts the dev server (Metro Bundler)
+
+### Environmental Variables
+Currently there is one envionmental variable in .env, `API_BASE_URL`, which needs to be filled to the correct base URL (protocol and host) if you are running a local instance of the backend. If you want to use the app on your phone while connecting to a local backend instance, you can use an [ngrok](https://ngrok.com/) tunnel. You would set `API_BASE_URL` to `https://[yourcode].ngrok.io`. (This needs to be added as a trusted OAuth callback URL in Google Developer Console. See seeus-app/seeus-backend repo.)
 
 ### React Native Dev Server (Metro Bundler)
 The Metro Bundler runs the TypeScript compiler whenever the code changes. It also serves the code to developer devices connecting to it via the Expo mobile app, enabling hot swapping of modules as the code changes. (In other words, instant updates without losing current state of the app.)
