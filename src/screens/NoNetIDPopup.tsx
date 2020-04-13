@@ -43,7 +43,6 @@ export default function NoNetIDPopup(props: {
         </Text>
       </View>
       <View style={styles.mainContainer}>
-        <Text style={styles.titleText}> Seeus Number: </Text>
         <Button
           label="734-487-3387"
           style={styles.phoneButton}
@@ -88,7 +87,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.seeusYellow,
     flexDirection: 'row',
     alignItems: 'flex-end',
-    flex: 1,
+    flex: 1.2,
     height: '100%',
     width: '100%',
   },
@@ -106,7 +105,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   titleText: {
-    fontSize: 30,
+    fontSize: 31,
     fontWeight: 'bold',
     color: colors.black,
     textAlign: 'center',
@@ -117,11 +116,13 @@ const styles = StyleSheet.create({
   },
   backButton: {
     backgroundColor: colors.black,
+    height: '100%',
+    width: '100%',
   },
   backButtonText: {
-    fontSize: 14,
+    fontSize: 22,
     fontWeight: 'bold',
     color: colors.white,
-    textAlign: 'left',
+    textAlign: 'center',
   },
 });
