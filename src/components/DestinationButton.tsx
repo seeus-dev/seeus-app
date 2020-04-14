@@ -14,7 +14,7 @@ const WIDTH = Dimensions.get('window').width;
 
 export default function DestinationButton(props) {
   return (
-    <TouchableOpacity onPress={} style={styles.container}>
+    <TouchableOpacity onPress={{}} style={styles.container}>
       <View style={styles.leftCol}>
         <Text style={{ fontSize: 8 }}>{'\u25A0'}</Text>
       </View>
