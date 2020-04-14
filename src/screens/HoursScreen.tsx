@@ -1,46 +1,30 @@
 import React from 'react';
-import { View, Text, StyleSheet, SafeAreaView, SectionList} from 'react-native';
-import baseStyle from '../styles/base';
+import {
+  View,
+  Text,
+  StyleSheet,
+  SafeAreaView,
+  SectionList,
+} from 'react-native';
 import colors, { theme } from '../styles/colors';
-import Constants from "expo-constants";
+import Constants from 'expo-constants';
 
 const DATA = [
   {
-    title: "Request A Walk",
-    data:
-    ['Sun                                 5:00pm-3:00am',
-     'Mon                                 5:00pm-1:00am',
-     'Tue                                 5:00pm-1:00am',
-     'Wed                                 5:00pm-1:00am',
-     'Thu                                 5:00pm-1:00am',
-     'Fri                                 5:00pm-1:00am',
-     'Sat                                 5:00pm-1:00am',
-
-    ]
+    title: 'Request A Walk',
+    data: ['Monday'],
   },
   {
     title: 'Request SeeUs Van',
-    data: ['Sun                                 5:00pm-3:00am',
-     'Mon                                 5:00pm-1:00am',
-     'Tue                                 5:00pm-1:00am',
-     'Wed                                 5:00pm-1:00am',
-     'Thu                                 5:00pm-1:00am',
-     'Fri                                 5:00pm-1:00am',
-     'Sat                                 5:00pm-1:00am',]
+    data: [],
   },
   {
     title: 'Request A Jump/Unlock',
-    data: ['Sun                                 5:00pm-3:00am',
-     'Mon                                 5:00pm-1:00am',
-     'Tue                                 5:00pm-1:00am',
-     'Wed                                 5:00pm-1:00am',
-     'Thu                                 5:00pm-1:00am',
-     'Fri                                 5:00pm-1:00am',
-     'Sat                                 5:00pm-1:00am',]
-  }
+    data: [],
+  },
 ];
 
-const Item = ({title}) => (
+const Item = ({ title }: { title: string }) => (
   <View style={styles.item}>
     <Text style={styles.title}>{title}</Text>
   </View>
@@ -61,13 +45,8 @@ const App = () => (
 
 export default App;
 
-
-
 export default function HoursScreen() {
-  return (
-    <View style={styles.container}>
-    </View>
-  );
+  return <View style={styles.container}></View>;
 }
 
 const styles = StyleSheet.create({
@@ -91,11 +70,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textDecorationLine: 'underline',
     fontSize: 25,
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     textAlign: 'center',
   },
   title: {
     fontSize: 12,
-    textAlign: 'center'
-  }
+    textAlign: 'center',
+  },
 });
