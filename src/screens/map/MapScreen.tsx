@@ -2,6 +2,8 @@ import React from 'react';
 import { Dimensions, StyleSheet, Text, View } from 'react-native';
 import baseStyle from '../../styles/base';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import DestinationButton from '../../components/DestinationButton';
+import Button from '../components/Button';
 
 const EMU_CAMPUS_MAP_START_REGION = {
   latitude: 42.25117744909886,
@@ -13,6 +15,7 @@ const EMU_CAMPUS_MAP_START_REGION = {
 export default function MapScreen() {
   return (
     <View style={styles.container}>
+      <DestinationButton />
       <MapView
         provider={PROVIDER_GOOGLE}
         style={styles.mapView}
