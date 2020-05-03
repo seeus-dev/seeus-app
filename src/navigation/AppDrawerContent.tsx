@@ -40,9 +40,9 @@ export default function AppDrawerContent(props) {
   return (
     <>
       <Header
-        name={authState.user.name || authState.user.username}
-        email={authState.user.eid}
-        imageUrl={authState.user.imageUrl}
+        name={authState.user.first_name || authState.user.username}
+        email={authState.user.username}
+        imageUrl={authState.user.picture_url}
       />
       <DrawerContentScrollView style={styles.scrollView} {...props}>
         <DrawerItemList
