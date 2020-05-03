@@ -9,6 +9,7 @@ import MapScreen from '../screens/map/MapScreen';
 import RequestsScreen from '../screens/RequestsScreen';
 import HoursScreen from '../screens/HoursScreen';
 import HelpScreen from '../screens/HelpScreen';
+import NoNetIDPopup from '../screens/NoNetIDPopup';
 import SettingsScreen from '../screens/SettingsScreen';
 import OauthWebViewScreen from '../screens/login/OauthWebViewScreen';
 import EnterEidScreen from '../screens/login/EnterEidScreen';
@@ -50,6 +51,7 @@ function getLoggedOutScreens() {
     <>
       <RootStack.Screen name="Entry" component={EntryScreen} />
       <RootStack.Screen name="Login" component={LoginScreen} />
+      <RootStack.Screen name="NoNetID" component={NoNetIDPopup} />
       <RootStack.Screen name="OauthWebView" component={OauthWebViewScreen} />
     </>
   );
