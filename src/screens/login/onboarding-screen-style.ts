@@ -7,7 +7,8 @@ export default StyleSheet.create({
     ...baseStyle.container,
     backgroundColor: theme.primary,
     justifyContent: 'flex-start',
-    paddingTop: 50,
+    alignItems: 'flex-start',
+    paddingTop: 40,
     padding: 20,
   },
   titleText: {
@@ -23,7 +24,7 @@ export default StyleSheet.create({
     marginTop: 10,
   },
   inputContainer: {
-    marginTop: 50,
+    marginTop: 40,
     paddingRight: 10,
     backgroundColor: theme.primaryLighter,
     borderRadius: 5,
@@ -49,7 +50,6 @@ export default StyleSheet.create({
   },
   positiveButton: {
     backgroundColor: colors.seeusYellow,
-    flex: 1,
     justifyContent: 'space-around',
   },
   positiveButtonLabel: {
@@ -57,9 +57,7 @@ export default StyleSheet.create({
   },
   negativeButton: {
     backgroundColor: null,
-    flex: 1,
     paddingLeft: 5,
-    marginRight: 70,
     justifyContent: 'flex-start',
   },
   negativeButtonLabel: {
