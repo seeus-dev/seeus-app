@@ -8,17 +8,19 @@ export enum AuthActionType {
 
 export type UserInfo = {
   username: string;
-  name?: string;
+  first_name?: string;
+  last_name?: string;
   eid?: string;
-  imageUrl?: string;
+  picture_url?: string;
 };
 
 // all fields optional because this is a "diff"; it's merged with existing user object in UpdateAuthUser action
 type UserInfoDiff = {
   username?: string;
-  name?: string;
+  first_name?: string;
+  last_name?: string;
   eid?: string;
-  imageUrl?: string;
+  picture_url?: string;
 };
 
 type Action = {
