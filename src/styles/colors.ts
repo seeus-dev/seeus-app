@@ -3,6 +3,8 @@ export const colors = {
   slightlyLighterDarkGreen: '#0d7e57',
   darkYellow: '#F2C94C',
   seeusYellow: '#FDE31A',
+  white: '#FFFFFF',
+  black: '#000000',
 };
 
 export const theme = {

@@ -34,9 +34,7 @@ export default function EntryScreen(props: {
           onPress={() => props.navigation.navigate('Login')}
         />
       </View>
-      <TouchableOpacity
-        onPress={() => alert('TODO: Navigate to the No Net ID Popup Screen')}
-      >
+      <TouchableOpacity onPress={() => props.navigation.navigate('NoNetID')}>
         <Text style={styles.noNetIdLink}>No NetID? Tap here</Text>
       </TouchableOpacity>
     </View>
